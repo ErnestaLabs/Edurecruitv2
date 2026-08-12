@@ -34,3 +34,15 @@ pnpm-debug.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# tool config directories (agent/IDE state)
+/.claude/
+/.codex/
+/.cursor/
+/.impeccable/
+/.impeccable_temp/
+/.kimchi/
+/.opencode/
+
+# temp
+swap_temp.txt
