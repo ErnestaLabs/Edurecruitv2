@@ -1,10 +1,3 @@
-import { Resend } from "resend"
-
-function getResend() {
-  if (!process.env.RESEND_API_KEY) return null
-  return new Resend(process.env.RESEND_API_KEY)
-}
-
 export async function POST(request: Request) {
   try {
     const { name, email, phone, message } = await request.json()
@@ -16,56 +9,52 @@ export async function POST(request: Request) {
       )
     }
 
-    // Send email notification (if configured)
-    const resendClient = getResend()
-    if (resendClient) {
-      await resendClient.emails.send({
-        from: "EduRecruitment <leads@edurecruitment.co.uk>",
-        to: process.env.FOUNDERS_EMAIL!,
-        subject: `New lead: ${name}`,
-        html: `
-          <h2>New Lead</h2>
-          <table>
-            <tr><td><strong>Name:</strong></td><td>${name}</td></tr>
-            <tr><td><strong>Email:</strong></td><td>${email}</td></tr>
-            <tr><td><strong>Phone:</strong></td><td>${phone || "—"}</td></tr>
-            <tr><td><strong>Message:</strong></td><td>${message || "—"}</td></tr>
-            <tr><td><strong>Time:</strong></td><td>${new Date().toLocaleString("en-GB")}</td></tr>
-          </table>
-        `,
-      })
-    }
+    // Write to Airtable Leads table (non-fatal; logs response body on failure)
+    const airtableToken =
+      process.env.AIRTABLE_API_KEY ?? process.env.AIRTABLE_TOKEN
+    const airtableBaseId = process.env.AIRTABLE_BASE_ID ?? "appomqUrdaazYORV2"
+    const airtableTableId =
+      process.env.AIRTABLE_TABLE_ID ?? "tblJXp25L1tSW8jlg"
 
-    // Google Sheets append (optional)
-    if (
-      process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL &&
-      process.env.GOOGLE_PRIVATE_KEY &&
-      process.env.GOOGLE_SHEET_ID
-    ) {
+    if (airtableToken) {
       try {
-        const { JWT } = await import("google-auth-library")
-        const { GoogleSpreadsheet } = await import("google-spreadsheet")
-        const auth = new JWT({
-          email: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
-          key: process.env.GOOGLE_PRIVATE_KEY.replace(/\\n/g, "\n"),
-          scopes: ["https://www.googleapis.com/auth/spreadsheets"],
-        })
-        const doc = new GoogleSpreadsheet(process.env.GOOGLE_SHEET_ID, auth)
-        await doc.loadInfo()
-        const sheet = doc.sheetsByIndex[0]
-        if (!sheet.headerValues || sheet.headerValues.length === 0) {
-          await sheet.setHeaderRow(["Timestamp", "Name", "Email", "Phone", "Message", "Status"])
+        const referer = request.headers.get("referer") ?? ""
+        const source = referer.includes("/contact")
+          ? "Website"
+          : referer.includes("/about")
+            ? "Website"
+            : "Website"
+
+        const res = await fetch(
+          `https://api.airtable.com/v0/${airtableBaseId}/${airtableTableId}`,
+          {
+            method: "POST",
+            headers: {
+              Authorization: `Bearer ${airtableToken}`,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              records: [
+                {
+                  fields: {
+                    name,
+                    email,
+                    phone: phone || "",
+                    notes: message || "",
+                    source,
+                    status: "new",
+                    "created via form": true,
+                  },
+                },
+              ],
+            }),
+          },
+        )
+        if (!res.ok) {
+          console.error("Airtable write failed:", res.status, await res.text())
         }
-        await sheet.addRow({
-          Timestamp: new Date().toISOString(),
-          Name: name,
-          Email: email,
-          Phone: phone || "",
-          Message: message || "",
-          Status: "New",
-        })
-      } catch (sheetError) {
-        console.error("Google Sheets append failed (non-fatal):", sheetError)
+      } catch (err) {
+        console.error("Airtable write threw (non-fatal):", err)
       }
     }
 

@@ -1,7 +1,6 @@
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
 import { CtaSection } from "@/components/cta-section"
-import { Badge } from "@/components/ui/badge"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { GraduationCap, Heart, Lightbulb, Shield, Users } from "lucide-react"
 
@@ -37,17 +36,11 @@ export default function AboutPage() {
         <section className="section-padding bg-cream pt-40">
           <div className="container-wide px-4 md:px-8">
             <div className="mx-auto max-w-3xl">
-              <Badge variant="outline" className="mb-6 border-gold/30 text-gold-foreground bg-gold/10">
-                About Us
-              </Badge>
               <h1 className="font-heading text-5xl leading-tight text-navy md:text-6xl">
-                We believe every student deserves a fair shot at their dream university.
+                Every student deserves honest guidance, personal support, and someone who believes in their potential.
               </h1>
               <p className="mt-6 text-lg leading-relaxed text-text-muted">
-                EduRecruitment was founded by two young women who&apos;d just been through the UK
-                university admissions process themselves. They saw talented peers miss out on top
-                offers — not because they weren&apos;t good enough, but because they didn&apos;t have
-                the right guidance.
+                VM Education Recruitment was founded on a simple idea: every student deserves honest guidance, personal support, and someone who genuinely believes in their potential.
               </p>
             </div>
           </div>
@@ -59,24 +52,26 @@ export default function AboutPage() {
             <div className="grid items-center gap-16 md:grid-cols-2">
               <div>
                 <h2 className="font-heading text-3xl text-navy md:text-4xl">
-                  From experience to expertise
+                  Our journey
                 </h2>
                 <div className="mt-8 space-y-4 text-text-muted leading-relaxed">
                   <p>
-                    We met during our first week at university — two people from very different
-                    backgrounds who&apos;d both made it to a top UK institution through a combination
-                    of hard work, good advice, and a bit of luck.
+                    Our journey began in 2018, when Valentina and Carlotta met at university. They were both students with big dreams, ambitious goals, and a shared passion for helping others succeed. As their friendship grew, so did their vision. They worked together throughout their careers in higher education and student recruitment, gaining valuable experience while always holding onto one dream: to build a company that puts students first.
                   </p>
                   <p>
-                    As we progressed through our degrees, friends and family started asking for
-                    advice on their own applications. We helped write personal statements, prepared
-                    people for interviews, and guided course selections. The results were remarkable
-                    — and we realised this was something worth building.
+                    That dream became VM Education Recruitment.
                   </p>
                   <p>
-                    After graduating, we founded EduRecruitment with a simple mission: make the kind
-                    of strategic, personal admissions guidance that used to be reserved for the few
-                    accessible to every ambitious student.
+                    We understand that applying to university can feel overwhelming. Choosing the right course, preparing applications, writing personal statements, understanding Student Finance, and getting ready for interviews are all important steps that can shape a person&apos;s future. That&apos;s why we take the time to understand each student&apos;s individual goals and circumstances, providing honest advice and personalised support from the very beginning.
+                  </p>
+                  <p>
+                    We believe that education changes lives, and we are proud to have helped students from a wide range of backgrounds take the next step towards their careers. Whether you&apos;re returning to education after years away, changing careers, or applying to university for the first time, we&apos;re here to guide you with professionalism, integrity, and genuine care.
+                  </p>
+                  <p>
+                    At VM Education Recruitment, you&apos;re never just another application. You&apos;re a person with ambitions, and we&apos;re committed to helping you achieve them.
+                  </p>
+                  <p>
+                    Our mission is simple: to make higher education more accessible by providing trustworthy advice, dedicated support, and a service that always puts students first.
                   </p>
                 </div>
               </div>
@@ -128,7 +123,7 @@ export default function AboutPage() {
           <div className="container-wide px-4 md:px-8">
             <div className="mx-auto max-w-3xl">
               <h2 className="font-heading text-4xl text-navy md:text-5xl">
-                Why choose EduRecruitment?
+                Why choose VM Education Recruitment?
               </h2>
               <div className="mt-12 space-y-8">
                 {[
@@ -149,9 +144,12 @@ export default function AboutPage() {
                     description: "We're honest about what we can achieve together. If we don't think we can help, we'll tell you — and point you to someone who can.",
                   },
                 ].map((item) => (
-                  <div key={item.title} className="border-l-2 border-gold pl-6">
-                    <h3 className="font-heading text-xl text-navy">{item.title}</h3>
-                    <p className="mt-2 text-text-muted leading-relaxed">{item.description}</p>
+                  <div key={item.title} className="flex gap-4">
+                    <span aria-hidden="true" className="mt-3 inline-block size-1.5 shrink-0 rounded-full bg-gold" />
+                    <div>
+                      <h3 className="font-heading text-xl text-navy">{item.title}</h3>
+                      <p className="mt-2 text-text-muted leading-relaxed">{item.description}</p>
+                    </div>
                   </div>
                 ))}
               </div>

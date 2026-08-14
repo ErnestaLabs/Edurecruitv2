@@ -19,7 +19,7 @@ export type LeadFormState = {
 
 export async function submitLead(
   prevState: LeadFormState,
-  formData: FormData,
+  formData: FormData
 ): Promise<LeadFormState> {
   const name = formData.get("name")?.toString().trim() ?? ""
   const email = formData.get("email")?.toString().trim() ?? ""
@@ -29,8 +29,8 @@ export async function submitLead(
   // Validate
   const errors: LeadFormState["errors"] = {}
   if (!name) errors.name = "Name is required"
-  if (!email) errors.email = "Email is required"
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
+  if (!email && !phone) errors.email = "Email or phone number is required"
+  else if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))
     errors.email = "Enter a valid email address"
 
   if (Object.keys(errors).length > 0) {
@@ -52,7 +52,9 @@ export async function submitLead(
           "<tr><td><strong>Email:</strong></td><td>" + email + "</td></tr>",
           "<tr><td><strong>Phone:</strong></td><td>" + phone + "</td></tr>",
           "<tr><td><strong>Message:</strong></td><td>" + message + "</td></tr>",
-          "<tr><td><strong>Time:</strong></td><td>" + new Date().toLocaleString("en-GB") + "</td></tr>",
+          "<tr><td><strong>Time:</strong></td><td>" +
+            new Date().toLocaleString("en-GB") +
+            "</td></tr>",
           "</table>",
         ].join("\n"),
       })
@@ -79,7 +81,14 @@ export async function submitLead(
         const sheet = doc.sheetsByIndex[0]
 
         if (!sheet.headerValues || sheet.headerValues.length === 0) {
-          await sheet.setHeaderRow(["Timestamp", "Name", "Email", "Phone", "Message", "Status"])
+          await sheet.setHeaderRow([
+            "Timestamp",
+            "Name",
+            "Email",
+            "Phone",
+            "Message",
+            "Status",
+          ])
         }
 
         await sheet.addRow({
@@ -95,36 +104,64 @@ export async function submitLead(
       }
     }
 
-    // 3. Write to Airtable Leads table
-    const airtableToken = process.env.AIRTABLE_TOKEN
+    // 3. Write to Airtable Leads table. Support both the original env names
+    // and the newer API_KEY/TABLE_ID aliases used by local deployments.
+    const airtableToken =
+      process.env.AIRTABLE_TOKEN ?? process.env.AIRTABLE_API_KEY
     const baseId = process.env.AIRTABLE_BASE_ID
-    const leadsTableId = process.env.AIRTABLE_LEADS_TABLE_ID
+    const leadsTableId =
+      process.env.AIRTABLE_LEADS_TABLE_ID ?? process.env.AIRTABLE_TABLE_ID
     if (airtableToken && baseId && leadsTableId) {
       try {
-        await fetch("https://api.airtable.com/v0/" + baseId + "/" + leadsTableId, {
-          method: "POST",
-          headers: {
-            Authorization: "Bearer " + airtableToken,
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            records: [
-              {
-                fields: {
-                  fldr8bcFX6sJQNFt4: name,
-                  fldUg9EZQwiDge1xw: email,
-                  fld6TUpwo5KG3Ej2T: phone,
-                  fldAjcRwFbugICx6f: message,
-                  fldRGFuZ4iPMerzPc: "Website",
-                  fldKJPH5um6UoeRwl: "New",
-                  fldHxI1DXa5AVW0qS: true,
+        const airtableResponse = await fetch(
+          "https://api.airtable.com/v0/" + baseId + "/" + leadsTableId,
+          {
+            method: "POST",
+            headers: {
+              Authorization: "Bearer " + airtableToken,
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              records: [
+                {
+                  fields: {
+                    fldr8bcFX6sJQNFt4: name,
+                    fldUg9EZQwiDge1xw: email,
+                    fld6TUpwo5KG3Ej2T: phone,
+                    fldAjcRwFbugICx6f: message,
+                    fldRGFuZ4iPMerzPc: "Website",
+                    fldKJPH5um6UoeRwl: "New",
+                    fldHxI1DXa5AVW0qS: true,
+                  },
                 },
-              },
-            ],
-          }),
-        })
+              ],
+            }),
+          }
+        )
+
+        if (!airtableResponse.ok) {
+          console.error(
+            "Airtable write failed:",
+            airtableResponse.status,
+            await airtableResponse.text()
+          )
+          return {
+            success: false,
+            message: "We couldn't save your enquiry. Please try again.",
+          }
+        }
       } catch (airtableError) {
-        console.error("Airtable write failed (non-fatal):", airtableError)
+        console.error("Airtable write failed:", airtableError)
+        return {
+          success: false,
+          message: "We couldn't save your enquiry. Please try again.",
+        }
+      }
+    } else {
+      console.error("Airtable is not configured for lead capture")
+      return {
+        success: false,
+        message: "Lead capture is temporarily unavailable. Please try again.",
       }
     }
 
@@ -136,7 +173,8 @@ export async function submitLead(
     console.error("Lead submission error:", error)
     return {
       success: false,
-      message: "Something went wrong. Please try again or WhatsApp us directly.",
+      message:
+        "Something went wrong. Please try again or WhatsApp us directly.",
     }
   }
 }

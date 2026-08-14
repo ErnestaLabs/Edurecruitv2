@@ -12,8 +12,8 @@ interface CtaSectionProps {
 
 export function CtaSection({
   title = "Ready to start your journey?",
-  description = "Book a free 30-minute consultation to discuss your goals and discover how we can help you secure your place at a top UK university.",
-  primaryLabel = "Book a free consultation",
+  description = "Send us a message about your university plans and we’ll help you work out the next step.",
+  primaryLabel = "Get in touch",
   primaryHref = "/contact",
   secondaryLabel = "Explore our services",
   secondaryHref = "/services",
@@ -40,7 +40,7 @@ export function CtaSection({
               href={secondaryHref}
               variant="outline"
               size="lg"
-              className="rounded-full border-navy/30 px-8 text-navy hover:bg-navy/5"
+              className="rounded-full border-navy/30 bg-transparent px-8 text-navy hover:bg-navy/5"
             >
               {secondaryLabel}
             </LinkButton>

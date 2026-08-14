@@ -1,48 +1,48 @@
-"use client";
+"use client"
 
-import { useEffect, useState } from "react";
-import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react";
-import { motion, AnimatePresence } from "motion/react";
+import { useEffect, useState } from "react"
+import { IconArrowLeft, IconArrowRight } from "@tabler/icons-react"
+import { motion, AnimatePresence } from "motion/react"
 
 type Testimonial = {
-  quote: string;
-  name: string;
-  designation: string;
-  src: string;
-};
+  quote: string
+  name: string
+  designation: string
+  src: string
+}
 
 export const AnimatedTestimonials = ({
   testimonials,
   autoplay = false,
 }: {
-  testimonials: Testimonial[];
-  autoplay?: boolean;
+  testimonials: Testimonial[]
+  autoplay?: boolean
 }) => {
-  const [active, setActive] = useState(0);
-  const [mounted, setMounted] = useState(false);
+  const [active, setActive] = useState(0)
+  const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    setMounted(true)
+  }, [])
 
   const handleNext = () => {
-    setActive((prev) => (prev + 1) % testimonials.length);
-  };
+    setActive((prev) => (prev + 1) % testimonials.length)
+  }
 
   const handlePrev = () => {
-    setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length);
-  };
+    setActive((prev) => (prev - 1 + testimonials.length) % testimonials.length)
+  }
 
-  const isActive = (index: number) => index === active;
+  const isActive = (index: number) => index === active
 
   useEffect(() => {
     if (autoplay) {
-      const interval = setInterval(handleNext, 5000);
-      return () => clearInterval(interval);
+      const interval = setInterval(handleNext, 5000)
+      return () => clearInterval(interval)
     }
-  }, [autoplay]);
+  }, [autoplay])
 
-  const randomRotateY = () => Math.floor(Math.random() * 21) - 10;
+  const randomRotateY = () => Math.floor(Math.random() * 21) - 10
 
   if (!mounted) {
     return (
@@ -62,9 +62,15 @@ export const AnimatedTestimonials = ({
           </div>
           <div className="flex flex-col justify-between py-4">
             <div>
-              <h3 className="text-2xl font-bold text-cream">{testimonials[0].name}</h3>
-              <p className="text-sm text-gold/80">{testimonials[0].designation}</p>
-              <p className="mt-8 text-lg leading-relaxed text-cream/80">{testimonials[0].quote}</p>
+              <h3 className="text-2xl font-bold text-cream">
+                {testimonials[0].name}
+              </h3>
+              <p className="text-sm text-gold/80">
+                {testimonials[0].designation}
+              </p>
+              <p className="mt-8 text-lg leading-relaxed text-cream/80">
+                {testimonials[0].quote}
+              </p>
             </div>
             <div className="flex gap-4 pt-12 md:pt-0">
               <button className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gold/20">
@@ -77,7 +83,7 @@ export const AnimatedTestimonials = ({
           </div>
         </div>
       </div>
-    );
+    )
   }
 
   return (
@@ -100,8 +106,9 @@ export const AnimatedTestimonials = ({
                     scale: isActive(index) ? 1 : 0.95,
                     z: isActive(index) ? 0 : -100,
                     rotate: isActive(index) ? 0 : randomRotateY(),
-                    zIndex: isActive(index) ? 40 : testimonials.length + 2 - index,
-                    y: isActive(index) ? [0, -80, 0] : 0,
+                    zIndex: isActive(index)
+                      ? 40
+                      : testimonials.length + 2 - index,
                   }}
                   exit={{
                     opacity: 0,
@@ -177,5 +184,5 @@ export const AnimatedTestimonials = ({
         </div>
       </div>
     </div>
-  );
-};
+  )
+}

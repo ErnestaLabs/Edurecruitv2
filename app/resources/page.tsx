@@ -77,9 +77,6 @@ export default function ResourcesPage() {
         <section className="section-padding bg-cream pt-40">
           <div className="container-wide px-4 md:px-8">
             <div className="mx-auto max-w-3xl">
-              <Badge variant="outline" className="mb-6 border-gold/30 text-gold-foreground bg-gold/10">
-                Resources
-              </Badge>
               <h1 className="font-heading text-5xl leading-tight text-navy md:text-6xl">
                 Advice and insights from our consultants
               </h1>

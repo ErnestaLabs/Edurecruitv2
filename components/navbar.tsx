@@ -8,6 +8,7 @@ import { LinkButton } from "@/components/link-button"
 
 const navLinks = [
   { href: "/", label: "Home" },
+  { href: "/about", label: "About" },
   { href: "#services", label: "Services" },
   { href: "#process", label: "Process" },
   { href: "#testimonials", label: "Testimonials" },
@@ -30,16 +31,16 @@ export function Navbar() {
     } else {
       document.body.style.overflow = ""
     }
-    return () => { document.body.style.overflow = "" }
+    return () => {
+      document.body.style.overflow = ""
+    }
   }, [isMobileOpen])
 
   return (
     <header
       className={cn(
         "fixed inset-x-0 top-0 z-50 transition-all duration-500",
-        isScrolled
-          ? "bg-cream/95 backdrop-blur-md shadow-sm"
-          : "bg-transparent"
+        isScrolled ? "bg-cream/95 shadow-sm backdrop-blur-md" : "bg-transparent"
       )}
     >
       <nav className="container-wide flex items-center justify-between px-4 py-4 md:px-8">
@@ -47,7 +48,9 @@ export function Navbar() {
           <span className="font-heading text-xl tracking-tight text-navy md:text-2xl">
             EduRecruitment
           </span>
-          <span className="hidden text-xs text-gold md:inline-block">.co.uk</span>
+          <span className="hidden text-xs text-gold md:inline-block">
+            .co.uk
+          </span>
         </Link>
 
         {/* Desktop nav */}
@@ -61,8 +64,11 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
-          <LinkButton href="/contact" className="rounded-full bg-navy text-cream hover:bg-navy-light">
-            Book a call
+          <LinkButton
+            href="/contact"
+            className="rounded-full bg-navy text-cream hover:bg-navy-light"
+          >
+            Get in touch
           </LinkButton>
         </div>
 
@@ -72,14 +78,20 @@ export function Navbar() {
           onClick={() => setIsMobileOpen(!isMobileOpen)}
           aria-label={isMobileOpen ? "Close menu" : "Open menu"}
         >
-          {isMobileOpen ? <X className="size-6 text-navy" /> : <Menu className="size-6 text-navy" />}
+          {isMobileOpen ? (
+            <X className="size-6 text-navy" />
+          ) : (
+            <Menu className="size-6 text-navy" />
+          )}
         </button>
 
         {/* Mobile menu */}
         <div
           className={cn(
             "fixed inset-0 z-40 flex flex-col items-center justify-center gap-8 bg-cream transition-all duration-500 md:hidden",
-            isMobileOpen ? "opacity-100 visible" : "opacity-0 invisible pointer-events-none"
+            isMobileOpen
+              ? "visible opacity-100"
+              : "pointer-events-none invisible opacity-0"
           )}
         >
           {navLinks.map((link) => (
@@ -92,8 +104,13 @@ export function Navbar() {
               {link.label}
             </Link>
           ))}
-          <LinkButton href="/contact" onClick={() => setIsMobileOpen(false)} className="mt-4 rounded-full bg-navy text-cream hover:bg-navy-light" size="lg">
-            Book a call
+          <LinkButton
+            href="/contact"
+            onClick={() => setIsMobileOpen(false)}
+            className="mt-4 rounded-full bg-navy text-cream hover:bg-navy-light"
+            size="lg"
+          >
+            Get in touch
           </LinkButton>
         </div>
       </nav>

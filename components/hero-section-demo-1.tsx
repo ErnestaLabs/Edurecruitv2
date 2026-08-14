@@ -1,31 +1,46 @@
-"use client";
+"use client"
 
-import { motion } from "motion/react";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { ArrowRight } from "lucide-react";
+import { motion } from "motion/react"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { TextGenerateEffect } from "@/components/aceternity/text-generate-effect"
+import { ArrowRight } from "lucide-react"
 
 interface HeroSectionOneProps {
-  badge?: string;
-  headline: string;
-  highlight: string;
-  description: string;
-  primaryCta: { text: string; href: string };
-  secondaryCta: { text: string; href: string };
-  children?: React.ReactNode;
+  badge?: string
+  headline: string
+  highlight: string
+  description: string
+  supportingLine?: string
+  primaryCta: { text: string; href: string }
+  secondaryCta: { text: string; href: string }
+  children?: React.ReactNode
 }
 
 export default function HeroSectionOne({
-  badge = "100% Free for Students",
+  badge,
   headline = "It's Not Too Late.",
   highlight = "University Is Waiting.",
   description = "Free, expert guidance for adults returning to education.",
+  supportingLine,
   primaryCta = { text: "Book a Free Chat", href: "#contact" },
   secondaryCta = { text: "How It Works", href: "#process" },
   children,
 }: HeroSectionOneProps) {
   return (
-    <div className="relative mx-auto flex min-h-svh max-w-7xl flex-col items-center justify-center px-4">
+    <div className="relative mx-auto flex min-h-svh max-w-7xl flex-col items-center justify-center overflow-hidden px-4">
+      {/* Subtle Aceternity-inspired gold wash: slow, low-contrast movement behind hero content. */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute top-[-18%] -left-1/4 z-0 h-[72%] w-[78%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(201,168,76,0.16)_0%,rgba(201,168,76,0.06)_34%,transparent_72%)] blur-3xl"
+        animate={{
+          x: ["-4%", "12%", "-4%"],
+          y: ["-2%", "8%", "-2%"],
+          scale: [1, 1.06, 1],
+        }}
+        transition={{ duration: 18, ease: "easeInOut", repeat: Infinity }}
+      />
+
       {/* Decorative lines */}
       <div className="absolute inset-y-0 left-0 h-full w-px bg-navy/10">
         <div className="absolute top-0 h-40 w-px bg-gradient-to-b from-transparent via-gold/50 to-transparent" />
@@ -41,69 +56,42 @@ export default function HeroSectionOne({
         {/* Left column: text */}
         <div>
           {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            className="mb-8"
-          >
-            <Badge className="border-gold/30 bg-gold/10 text-gold hover:bg-gold/20">
-              {badge}
-            </Badge>
-          </motion.div>
+          {badge && (
+            <motion.div
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="mb-8"
+            >
+              <Badge className="border-gold/30 bg-gold/10 text-gold hover:bg-gold/20">
+                {badge}
+              </Badge>
+            </motion.div>
+          )}
 
           {/* Headline with word-by-word animation */}
-          <h1 className="relative z-10 font-heading text-4xl leading-tight md:text-6xl lg:text-7xl">
-            {headline.split(" ").map((word, index) => (
-              <motion.span
-                key={index}
-                initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
-                animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                transition={{
-                  duration: 0.4,
-                  delay: 0.4 + index * 0.08,
-                  ease: "easeInOut",
-                }}
-                className="mr-2 inline-block text-navy"
-              >
-                {word}{" "}
-              </motion.span>
-            ))}
-            <br />
-            {highlight.split(" ").map((word, index) => (
-              <motion.span
-                key={`h-${index}`}
-                initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
-                animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                transition={{
-                  duration: 0.4,
-                  delay: 0.8 + index * 0.08,
-                  ease: "easeInOut",
-                }}
-                className="mr-2 inline-block text-gold"
-              >
-                {word}{" "}
-              </motion.span>
-            ))}
+          <h1 className="relative z-10 font-heading text-4xl leading-tight text-navy md:text-6xl lg:text-7xl">
+            <span className="block">
+              <TextGenerateEffect
+                words={headline}
+                className="font-heading text-4xl leading-tight text-navy md:text-6xl lg:text-7xl"
+              />
+            </span>
+            <span className="mt-2 block text-gold md:mt-3">{highlight}</span>
           </h1>
 
           {/* Description */}
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 1.4 }}
-            className="relative z-10 mt-6 max-w-lg text-lg leading-relaxed text-navy/70"
-          >
+          <p className="relative z-10 mt-6 max-w-lg text-lg leading-relaxed text-navy/70">
             {description}
-          </motion.p>
+          </p>
+          {supportingLine && (
+            <p className="relative z-10 mt-3 max-w-lg text-sm leading-relaxed text-text-muted">
+              {supportingLine}
+            </p>
+          )}
 
           {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.4, delay: 1.6 }}
-            className="relative z-10 mt-10 flex flex-col gap-4 sm:flex-row"
-          >
+          <div className="relative z-10 mt-10 flex flex-col gap-4 sm:flex-row">
             <a href={primaryCta.href}>
               <Button className="rounded-full bg-gold px-8 py-6 text-base text-navy shadow-lg shadow-gold/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold/90 hover:shadow-xl hover:shadow-gold/30">
                 {primaryCta.text}
@@ -113,25 +101,17 @@ export default function HeroSectionOne({
             <a href={secondaryCta.href}>
               <Button
                 variant="outline"
-                className="rounded-full border-navy/30 px-8 py-6 text-base text-navy transition-all duration-300 hover:-translate-y-0.5 hover:bg-navy/5 hover:border-navy/50"
+                className="rounded-full border-navy/30 bg-transparent px-8 py-6 text-base text-navy transition-all duration-300 hover:-translate-y-0.5 hover:border-navy/50 hover:bg-navy/5"
               >
                 {secondaryCta.text}
               </Button>
             </a>
-          </motion.div>
+          </div>
         </div>
 
         {/* Right column: form */}
-        {children && (
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-          >
-            {children}
-          </motion.div>
-        )}
+        {children && <div>{children}</div>}
       </div>
     </div>
-  );
+  )
 }

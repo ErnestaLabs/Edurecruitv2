@@ -29,10 +29,10 @@ export default function UniversityPartners() {
     <section className="bg-white py-24 md:py-32">
       <div className="mx-auto max-w-7xl px-4">
         <FadeInSection className="mx-auto max-w-2xl text-center">
-          <h2 className="font-heading text-4xltext-navy md:text-5xl">
+          <h2 className="font-heading text-4xl text-navy md:text-5xl">
             Our University Partners
           </h2>
-          <p className="mt-4 text-lgtext-navy/60">
+          <p className="mt-4 text-lg text-navy/60">
             Click any university to explore available courses.
           </p>
         </FadeInSection>
@@ -54,7 +54,7 @@ export default function UniversityPartners() {
                   <img
                     src={uni.logo}
                     alt={`${uni.name} logo`}
-                    className="max-h-full max-w-160px object-contain grayscale transition-all duration-300 group-hover:scale-[1.03] group-hover:grayscale-0"
+                    className="max-h-full max-w-40 object-contain grayscale transition-all duration-300 group-hover:scale-[1.03] group-hover:grayscale-0"
                   />
                 </div>
                 <span className="text-center text-sm font-medium text-navy/50 transition-colors duration-300 group-hover:text-navy">

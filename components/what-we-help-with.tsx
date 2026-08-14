@@ -1,12 +1,7 @@
-"use client";
+﻿"use client"
 
-import { motion } from "motion/react";
-import {
-  GraduationCap,
-  PiggyBank,
-  UserCheck,
-  Compass,
-} from "lucide-react";
+import { motion } from "motion/react"
+import { GraduationCap, PiggyBank, UserCheck, Compass } from "lucide-react"
 
 const services = [
   {
@@ -41,15 +36,33 @@ const services = [
     image:
       "https://images.pexels.com/photos/5311406/pexels-photo-5311406.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
   },
-];
+]
 
 export function WhatWeHelpWith() {
   return (
-    <section className="relative overflow-hidden bg-cream py-24 md:py-32">
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,rgba(27,42,74,0.03)_0%,transparent_60%)]" />
-      <div className="pointer-events-none absolute bottom-0 right-0 h-96 w-96 rounded-full bg-gold/5 blur-3xl" />
+    <section
+      id="services"
+      className="relative isolate overflow-hidden bg-navy bg-[radial-gradient(ellipse_at_78%_12%,rgba(201,168,76,0.14)_0%,rgba(201,168,76,0.05)_34%,transparent_66%)] py-24 md:py-32"
+    >
+      {/* Broad, low-contrast navy-to-gold Aceternity-style wash. */}
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -top-[22%] -right-[12%] z-0 h-[108%] w-[112%] rounded-full bg-[radial-gradient(ellipse_at_68%_18%,rgba(201,168,76,0.18)_0%,rgba(201,168,76,0.09)_28%,rgba(201,168,76,0.035)_48%,transparent_72%)] blur-3xl"
+        animate={{
+          x: ["3%", "-3%", "3%"],
+          y: ["0%", "4%", "0%"],
+          scale: [1, 1.035, 1],
+        }}
+        transition={{ duration: 22, ease: "easeInOut", repeat: Infinity }}
+      />
+      <motion.div
+        aria-hidden="true"
+        className="pointer-events-none absolute -bottom-[30%] -left-[18%] z-0 h-[70%] w-[62%] rounded-full bg-[radial-gradient(ellipse_at_center,rgba(201,168,76,0.07)_0%,transparent_68%)] blur-3xl"
+        animate={{ x: ["-2%", "5%", "-2%"], scale: [1, 1.04, 1] }}
+        transition={{ duration: 26, ease: "easeInOut", repeat: Infinity }}
+      />
 
-      <div className="relative mx-auto max-w-7xl px-4">
+      <div className="relative z-10 mx-auto max-w-7xl px-4">
         <motion.div
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -57,15 +70,13 @@ export function WhatWeHelpWith() {
           transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
           className="mx-auto max-w-2xl text-center"
         >
-          <span className="mb-4 inline-block rounded-full border border-gold/30 bg-gold/10 px-4 py-1.5 text-xs font-medium tracking-wide text-gold uppercase">
+          <h2 className="font-heading text-4xl leading-tight text-cream md:text-5xl">
             What We Do
-          </span>
-          <h2 className="font-heading text-4xl leading-tight text-navy md:text-5xl">
-            We help you get into university
           </h2>
-          <p className="mt-4 text-lg leading-relaxed text-text-muted">
-            Whether you’re leaving college or coming back to education after years away,
-            we give you one dedicated consultant who stays with you from first call to first day.
+          <p className="mt-4 text-lg leading-relaxed text-cream/70">
+            Whether you’re leaving college or coming back to education after
+            years away, we give you one dedicated consultant who stays with you
+            from first call to first day.
           </p>
         </motion.div>
 
@@ -104,10 +115,10 @@ export function WhatWeHelpWith() {
                   <div className="mb-3 flex size-10 items-center justify-center rounded-xl bg-gold/10">
                     <service.icon className="size-5 text-gold" />
                   </div>
-                  <h3 className="font-heading text-2xl leading-snug text-navy md:text-3xl">
+                  <h3 className="font-heading text-2xl leading-snug text-cream md:text-3xl">
                     {service.title}
                   </h3>
-                  <p className="mt-3 max-w-prose leading-relaxed text-text-muted">
+                  <p className="mt-3 max-w-prose leading-relaxed text-cream/70">
                     {service.description}
                   </p>
                   <a
@@ -136,5 +147,5 @@ export function WhatWeHelpWith() {
         </div>
       </div>
     </section>
-  );
+  )
 }

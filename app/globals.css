@@ -146,3 +146,47 @@
     @apply mx-auto max-w-7xl;
   }
 }
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Screenshot mode (?screenshot=1) — forces every motion-driven reveal into its
+ * final visible state so headless captures don't show empty sections when
+ * IntersectionObservers haven't fired yet. No effect when the flag is absent. */
+body[data-screenshot="true"] *,
+body[data-screenshot="true"] *::before,
+body[data-screenshot="true"] *::after {
+  opacity: 1 !important;
+  transform: none !important;
+  animation-duration: 0.001ms !important;
+  animation-delay: 0ms !important;
+  transition-duration: 0.001ms !important;
+  transition-delay: 0ms !important;
+  filter: none !important;
+}
+
+/* In screenshot mode, hero sections should fit their content rather than fill
+ * the viewport — otherwise their centered content ends up stranded mid-page
+ * when the viewport is tall (e.g. chrome --window-size=1440,5400). */
+body[data-screenshot="true"] [class*="min-h-svh"],
+body[data-screenshot="true"] [class*="min-h-screen"] {
+  min-height: auto !important;
+}
+
+/* Sticky/fixed navbars leave placeholder space in normal layout; collapse it
+ * so the page flows top-to-bottom in the screenshot. */
+body[data-screenshot="true"] [style*="height"][style*="visibility: hidden"],
+body[data-screenshot="true"] .h-16,
+body[data-screenshot="true"] .h-20,
+body[data-screenshot="true"] header[style*="--nextcss-h"] {
+  height: 0 !important;
+  min-height: 0 !important;
+}
