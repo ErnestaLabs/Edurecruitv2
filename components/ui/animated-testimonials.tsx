@@ -72,7 +72,7 @@ export const AnimatedTestimonials = ({
                 {testimonials[0].quote}
               </p>
             </div>
-            <div className="flex gap-4 pt-12 md:pt-0">
+            <div className="mt-6 flex shrink-0 gap-4 md:mt-8 md:pt-0">
               <button className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gold/20">
                 <IconArrowLeft className="h-5 w-5 text-gold" />
               </button>
@@ -88,7 +88,7 @@ export const AnimatedTestimonials = ({
 
   return (
     <div className="mx-auto max-w-sm px-4 py-20 font-sans antialiased md:max-w-4xl md:px-8 lg:px-12">
-      <div className="relative grid grid-cols-1 gap-20 md:grid-cols-2">
+      <div className="relative grid grid-cols-1 gap-12 md:grid-cols-2 md:gap-20">
         <div>
           <div className="relative h-80 w-full">
             <AnimatePresence>
@@ -120,7 +120,7 @@ export const AnimatedTestimonials = ({
                     duration: 0.4,
                     ease: "easeInOut",
                   }}
-                  className="absolute inset-0 origin-bottom"
+                  className="absolute inset-0 origin-center"
                 >
                   <img
                     src={testimonial.src}
@@ -135,8 +135,9 @@ export const AnimatedTestimonials = ({
             </AnimatePresence>
           </div>
         </div>
-        <div className="flex flex-col justify-between py-4">
+        <div className="flex min-h-[28rem] flex-col py-4 md:min-h-0 md:justify-between">
           <motion.div
+            className="min-h-0 flex-1"
             key={active}
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
@@ -149,7 +150,7 @@ export const AnimatedTestimonials = ({
             <p className="text-sm text-gold/80">
               {testimonials[active].designation}
             </p>
-            <motion.p className="mt-8 text-lg leading-relaxed text-cream/80">
+            <motion.p className="mt-8 max-h-[18rem] overflow-y-auto pr-2 text-lg leading-relaxed text-cream/80 md:max-h-[24rem]">
               {testimonials[active].quote.split(" ").map((word, index) => (
                 <motion.span
                   key={index}
@@ -167,7 +168,7 @@ export const AnimatedTestimonials = ({
               ))}
             </motion.p>
           </motion.div>
-          <div className="flex gap-4 pt-12 md:pt-0">
+          <div className="mt-6 flex shrink-0 gap-4 md:mt-8 md:pt-0">
             <button
               onClick={handlePrev}
               className="group/button flex h-7 w-7 items-center justify-center rounded-full bg-gold/20 hover:bg-gold/30"
