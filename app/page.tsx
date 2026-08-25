@@ -1,7 +1,7 @@
 "use client"
 
 /**
- * Relume-led page system: Header143 shapes the hero, Timeline5 shapes the process,
+ * Relume-led page system: Header143 shapes the claim-and-evidence hero, Timeline5 shapes the process,
  * Faq3 shapes questions, and Contact6 shapes conversion. Persona Walkthrough,
  * Content Creator, Behavioral Nudge, Visual Storyteller, and Frontend Developer
  * responsibilities are applied here through inclusive audience copy, narrative order,
@@ -221,42 +221,46 @@ export default function HomePage() {
 
       <main id="main-content">
         <section className="hero-section relative overflow-hidden border-b border-navy/10">
-          <div className="container-wide px-5 py-12 md:px-8 md:py-16 lg:py-24">
-            <div className="max-w-4xl">
-              <BlurFade delay={0.05} direction="up" inView>
+          <div className="container-wide">
+            <div className="hero-grid grid lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[1.08fr_0.92fr]">
+              <BlurFade delay={0.05} direction="up" inView className="px-5 pt-12 md:px-8 md:pt-16 lg:col-start-1 lg:row-start-1 lg:px-14 lg:pt-20 xl:px-20">
                 <p className="eyebrow">Free UK university application guidance</p>
-                <h1 className="display-hero mt-6">University applications feel complicated. Your first step <span className="text-gold">doesn’t have to.</span></h1>
-                <p className="mt-7 max-w-2xl text-lg leading-8 text-text-muted md:text-xl">
-                  One-to-one support for college leavers, returning learners, and career changers. Compare routes, prepare your application, and understand the next step before you commit.
-                </p>
-                <div className="mt-8">
-                  <PrimaryLink>Start a free 15-minute chat</PrimaryLink>
+                <h1 className="display-hero mt-5">University applications feel complicated. Your first step <span className="text-gold">doesn’t have to.</span></h1>
+              </BlurFade>
+
+              <BlurFade delay={0.12} direction="up" inView className="hero-proof relative mx-5 mt-8 min-h-[285px] overflow-hidden bg-navy md:mx-8 md:min-h-[380px] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mx-0 lg:mt-0 lg:min-h-full">
+                <Image
+                  src={assets.consultation}
+                  alt="Two people having a focused university planning conversation over notes and coffee."
+                  fill
+                  priority
+                  unoptimized
+                  sizes="(min-width: 1024px) 42vw, 100vw"
+                  className="absolute inset-0 size-full object-cover object-[58%_center]"
+                />
+                <div className="hero-proof-caption absolute right-0 bottom-0 left-0 bg-navy p-5 text-cream md:max-w-[34rem] md:p-6 lg:left-auto lg:max-w-[28rem] lg:p-7">
+                  <p className="text-xs font-bold tracking-[0.15em] text-gold uppercase">The first conversation</p>
+                  <p className="mt-2 font-heading text-xl leading-tight md:text-2xl">
+                    Bring your question. We will help you find the next useful answer.
+                  </p>
                 </div>
-                <p className="mt-8 flex max-w-xl items-start gap-3 border-l-2 border-gold pl-4 text-sm leading-6 text-navy/75">
-                  <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-gold" />
-                  Free for students. One dedicated consultant. Honest guidance, with no promise of an offer or funding decision.
-                </p>
+              </BlurFade>
+
+              <BlurFade delay={0.18} direction="up" inView className="px-5 pb-12 pt-8 md:px-8 md:pb-16 lg:col-start-1 lg:row-start-2 lg:self-end lg:px-14 lg:pb-20 xl:px-20">
+                <div className="flex flex-col">
+                  <p className="order-2 mt-6 max-w-2xl text-lg leading-8 text-text-muted md:text-xl lg:order-1 lg:mt-0">
+                    One-to-one support for college leavers, returning learners, and career changers. Compare routes, prepare your application, and understand the next step before you commit.
+                  </p>
+                  <div className="order-1 mt-0 lg:order-2 lg:mt-7">
+                    <PrimaryLink>Start a free 15-minute chat</PrimaryLink>
+                  </div>
+                  <p className="order-3 mt-7 flex max-w-xl items-start gap-3 border-l-2 border-gold pl-4 text-sm leading-6 text-navy/75">
+                    <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-gold" />
+                    Free for students. One dedicated consultant. Honest guidance, with no promise of an offer or funding decision.
+                  </p>
+                </div>
               </BlurFade>
             </div>
-
-            <BlurFade delay={0.16} direction="up" inView className="hero-media relative mt-10 min-h-[400px] overflow-hidden bg-navy md:mt-14 md:min-h-[520px] lg:min-h-[620px]">
-              <Image
-                src={assets.consultation}
-                alt="Two people having a focused university planning conversation over notes and coffee."
-                fill
-                priority
-                unoptimized
-                sizes="(min-width: 1440px) 1440px, 100vw"
-                className="absolute inset-0 size-full object-cover opacity-95"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
-              <div className="absolute right-5 bottom-5 left-5 max-w-2xl border border-cream/30 bg-navy/88 p-5 text-cream backdrop-blur md:right-auto md:bottom-9 md:left-9 md:p-8">
-                <p className="text-xs font-bold tracking-[0.15em] text-gold uppercase">The first conversation</p>
-                <p className="mt-3 font-heading text-2xl leading-tight md:text-4xl">
-                  Bring the question that has been sitting with you. We will help you find the next useful answer.
-                </p>
-              </div>
-            </BlurFade>
           </div>
         </section>
 
