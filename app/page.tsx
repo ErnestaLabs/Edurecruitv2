@@ -16,7 +16,6 @@ import { BlurFade } from "@/components/ui/blur-fade"
 import {
   ArrowRight,
   ArrowUpRight,
-  Check,
   CheckCircle2,
   ChevronDown,
   Menu,
@@ -220,47 +219,27 @@ export default function HomePage() {
       </header>
 
       <main id="main-content">
-        <section className="hero-section relative overflow-hidden border-b border-navy/10">
-          <div className="container-wide">
-            <div className="hero-grid grid lg:min-h-[calc(100vh-5rem)] lg:grid-cols-[1.08fr_0.92fr]">
-              <BlurFade delay={0.05} direction="up" inView className="px-5 pt-12 md:px-8 md:pt-16 lg:col-start-1 lg:row-start-1 lg:px-14 lg:pt-20 xl:px-20">
-                <p className="eyebrow">Free UK university application guidance</p>
-                <h1 className="display-hero mt-5">University applications feel complicated. Your first step <span className="text-gold">doesn’t have to.</span></h1>
-              </BlurFade>
-
-              <BlurFade delay={0.12} direction="up" inView className="hero-proof relative mx-5 mt-8 min-h-[285px] overflow-hidden bg-navy md:mx-8 md:min-h-[380px] lg:col-start-2 lg:row-span-2 lg:row-start-1 lg:mx-0 lg:mt-0 lg:min-h-full">
-                <Image
-                  src={assets.consultation}
-                  alt="Two people having a focused university planning conversation over notes and coffee."
-                  fill
-                  priority
-                  unoptimized
-                  sizes="(min-width: 1024px) 42vw, 100vw"
-                  className="absolute inset-0 size-full object-cover object-[58%_center]"
-                />
-                <div className="hero-proof-caption absolute right-0 bottom-0 left-0 bg-navy p-5 text-cream md:max-w-[34rem] md:p-6 lg:left-auto lg:max-w-[28rem] lg:p-7">
-                  <p className="text-xs font-bold tracking-[0.15em] text-gold uppercase">The first conversation</p>
-                  <p className="mt-2 font-heading text-xl leading-tight md:text-2xl">
-                    Bring your question. We will help you find the next useful answer.
-                  </p>
-                </div>
-              </BlurFade>
-
-              <BlurFade delay={0.18} direction="up" inView className="px-5 pb-12 pt-8 md:px-8 md:pb-16 lg:col-start-1 lg:row-start-2 lg:self-end lg:px-14 lg:pb-20 xl:px-20">
-                <div className="flex flex-col">
-                  <p className="order-2 mt-6 max-w-2xl text-lg leading-8 text-text-muted md:text-xl lg:order-1 lg:mt-0">
-                    One-to-one support for college leavers, returning learners, and career changers. Compare routes, prepare your application, and understand the next step before you commit.
-                  </p>
-                  <div className="order-1 mt-0 lg:order-2 lg:mt-7">
-                    <PrimaryLink>Start a free 15-minute chat</PrimaryLink>
-                  </div>
-                  <p className="order-3 mt-7 flex max-w-xl items-start gap-3 border-l-2 border-gold pl-4 text-sm leading-6 text-navy/75">
-                    <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-gold" />
-                    Free for students. One dedicated consultant. Honest guidance, with no promise of an offer or funding decision.
-                  </p>
-                </div>
-              </BlurFade>
-            </div>
+        <section className="hero-stark relative isolate min-h-[calc(100svh-5rem)] overflow-hidden bg-navy">
+          <Image
+            src={assets.consultation}
+            alt="Two people having a focused university planning conversation over notes and coffee."
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="absolute inset-0 size-full object-cover object-[58%_center]"
+          />
+          <div className="hero-stark-veil absolute inset-0" />
+          <div className="container-wide relative z-10 flex min-h-[calc(100svh-5rem)] items-end px-5 pb-12 pt-36 md:px-8 md:pb-16 md:pt-44 lg:px-14 lg:pb-20 xl:px-20">
+            <BlurFade delay={0.04} direction="up" inView className="max-w-3xl text-cream">
+              <h1 className="display-hero">Find the university path that <span className="text-gold">fits.</span></h1>
+              <p className="mt-7 max-w-md border-l-2 border-gold pl-4 text-sm leading-6 text-cream/90 md:text-base">
+                Free, personal UK university guidance. One dedicated consultant.
+              </p>
+              <div className="mt-8">
+                <PrimaryLink>Start your free 15-minute chat</PrimaryLink>
+              </div>
+            </BlurFade>
           </div>
         </section>
 
