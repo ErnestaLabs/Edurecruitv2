@@ -33,7 +33,7 @@ export function UniversityCourseAtlas() {
         </div>
 
         <div role="tablist" aria-label="University partners" className="partner-tabs mt-5 grid auto-cols-[minmax(146px,78%)] grid-flow-col border-l border-t border-cream/20 md:auto-cols-auto md:grid-flow-row md:grid-cols-3 lg:grid-cols-5">
-          {universities.map((university, index) => {
+          {universities.map((university) => {
             const selected = university.slug === activeUniversity.slug
             return (
               <button
@@ -45,7 +45,6 @@ export function UniversityCourseAtlas() {
                 onClick={() => setActiveSlug(university.slug)}
                 className={`partner-tab ${selected ? "partner-tab-active" : ""}`}
               >
-                <span className="partner-index">0{index + 1}</span>
                 <span className="partner-logo-plate relative flex h-12 w-full items-center justify-center">
                   <Image src={university.logo} alt={`${university.name} logo`} width={168} height={80} unoptimized className="max-h-12 w-auto max-w-[88%] object-contain" />
                 </span>
@@ -80,7 +79,7 @@ export function UniversityCourseAtlas() {
                 <Link href={`/universities/${activeUniversity.slug}`} className="inline-flex items-center gap-2 border-b border-gold pb-1 text-sm font-extrabold text-gold">
                   View full partner guide <ArrowUpRight aria-hidden="true" className="size-4" />
                 </Link>
-                <a href="#contact" className="inline-flex items-center gap-2 border-b border-cream/40 pb-1 text-sm font-extrabold text-cream">
+                <a href="#contact" className="button-primary">
                   Ask about {activeUniversity.shortName} <ArrowUpRight aria-hidden="true" className="size-4" />
                 </a>
               </div>
@@ -89,12 +88,10 @@ export function UniversityCourseAtlas() {
             <div>
               <div className="flex items-end justify-between gap-5 border-b border-cream/20 pb-4">
                 <h4 className="font-heading text-2xl md:text-3xl">A few courses in the guide</h4>
-                <span className="font-heading text-3xl text-gold">{String(activeUniversity.courses.length).padStart(2, "0")}</span>
               </div>
               <ol className="grid md:grid-cols-3">
-                {coursePreview.map((course, index) => (
+                {coursePreview.map((course) => (
                   <li key={course.name} className="course-row">
-                    <span className="font-heading text-lg text-gold">0{index + 1}</span>
                     <span className="leading-6 text-cream/88">{course.name}</span>
                   </li>
                 ))}

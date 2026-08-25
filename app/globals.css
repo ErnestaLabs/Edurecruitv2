@@ -144,16 +144,15 @@
   .course-atlas { position: relative; isolation: isolate; }
   .partner-tabs { overflow-x: auto; scroll-snap-type: x mandatory; }
   .partner-tab { position: relative; display: flex; min-height: 9rem; flex-direction: column; justify-content: space-between; gap: 0.75rem; scroll-snap-align: start; border-right: 1px solid rgba(252, 251, 247, 0.2); border-bottom: 1px solid rgba(252, 251, 247, 0.2); padding: 0.9rem; text-align: left; color: rgba(252, 251, 247, 0.7); transition: background-color 180ms ease-out, color 180ms ease-out, transform 180ms cubic-bezier(0.23, 1, 0.32, 1); }
-  .course-preview .partner-tab { min-height: 7.5rem; }
+  .course-preview .partner-tab { min-height: 6.25rem; }
   .partner-tab:hover { background: rgba(252, 251, 247, 0.06); color: #fcfbf7; }
   .partner-tab-active { z-index: 2; background: #c9a84c; color: #10263b; box-shadow: inset 0 0 0 2px #c9a84c; transform: translateY(-6px); }
   .partner-tab-active:hover { background: #c9a84c; color: #10263b; }
-  .partner-index { font-family: var(--font-heading); font-size: 2rem; line-height: 1; }
   .partner-logo-plate { border: 1px solid rgba(231, 223, 208, 0.6); background: #fcfbf7; padding: 0.65rem; }
   .atlas-fact { display: grid; grid-template-columns: 1.25rem 1fr; gap: 0.25rem 0.6rem; align-content: start; border-top: 1px solid rgba(252, 251, 247, 0.18); padding-top: 0.8rem; }
   .atlas-fact dt { color: rgba(252, 251, 247, 0.5); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.12em; text-transform: uppercase; }
   .atlas-fact dd { grid-column: 2; color: rgba(252, 251, 247, 0.88); line-height: 1.45; }
-  .course-row { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.8rem; border-bottom: 1px solid rgba(252, 251, 247, 0.15); padding: 1rem 0.5rem; }
+  .course-row { border-bottom: 1px solid rgba(252, 251, 247, 0.15); padding: 1rem 0.5rem; }
   .story-control { display: grid; width: 3.25rem; height: 3.25rem; place-items: center; border: 1px solid rgba(252, 251, 247, 0.45); background: rgba(16, 38, 59, 0.55); color: #fcfbf7; backdrop-filter: blur(12px); transition: transform 160ms ease-out, background-color 160ms ease-out; }
   .story-control:hover { transform: translateY(-3px); background: #c9a84c; color: #10263b; }
   .story-control:active { transform: scale(0.97); }

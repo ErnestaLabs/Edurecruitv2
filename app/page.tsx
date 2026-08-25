@@ -116,15 +116,6 @@ function PrimaryLink({ children, href = "#contact" }: { children: React.ReactNod
   )
 }
 
-function TextLink({ children, href }: { children: React.ReactNode; href: string }) {
-  return (
-    <a className="button-secondary" href={href}>
-      <span>{children}</span>
-      <ArrowRight aria-hidden="true" className="size-4" />
-    </a>
-  )
-}
-
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false)
   const [openFaq, setOpenFaq] = useState<number | null>(0)
@@ -231,28 +222,24 @@ export default function HomePage() {
       <main id="main-content">
         <section className="hero-section relative overflow-hidden border-b border-navy/10">
           <div className="container-wide px-5 py-12 md:px-8 md:py-16 lg:py-24">
-            <div className="grid items-end gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
+            <div className="max-w-4xl">
               <BlurFade delay={0.05} direction="up" inView>
                 <p className="eyebrow">Free UK university application guidance</p>
-                <h1 className="display-hero mt-7">University applications feel complicated. Your first step <span className="text-gold">doesn’t have to.</span></h1>
-              </BlurFade>
-
-              <BlurFade delay={0.14} direction="up" inView className="md:pb-2 lg:pl-6">
-                <p className="max-w-xl text-lg leading-8 text-text-muted md:text-xl">
+                <h1 className="display-hero mt-6">University applications feel complicated. Your first step <span className="text-gold">doesn’t have to.</span></h1>
+                <p className="mt-7 max-w-2xl text-lg leading-8 text-text-muted md:text-xl">
                   One-to-one support for college leavers, returning learners, and career changers. Compare routes, prepare your application, and understand the next step before you commit.
                 </p>
-                <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                <div className="mt-8">
                   <PrimaryLink>Start a free 15-minute chat</PrimaryLink>
-                  <TextLink href="https://wa.me/447710891277">Message us on WhatsApp</TextLink>
                 </div>
-                <p className="mt-9 flex max-w-lg items-start gap-3 border-l-2 border-gold pl-4 text-sm leading-6 text-navy/75">
+                <p className="mt-8 flex max-w-xl items-start gap-3 border-l-2 border-gold pl-4 text-sm leading-6 text-navy/75">
                   <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-gold" />
                   Free for students. One dedicated consultant. Honest guidance, with no promise of an offer or funding decision.
                 </p>
               </BlurFade>
             </div>
 
-            <BlurFade delay={0.2} direction="up" inView className="hero-media relative mt-12 min-h-[430px] overflow-hidden bg-navy md:mt-16 md:min-h-[560px] lg:min-h-[680px]">
+            <BlurFade delay={0.16} direction="up" inView className="hero-media relative mt-10 min-h-[400px] overflow-hidden bg-navy md:mt-14 md:min-h-[520px] lg:min-h-[620px]">
               <Image
                 src={assets.consultation}
                 alt="Two people having a focused university planning conversation over notes and coffee."
