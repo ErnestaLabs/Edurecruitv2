@@ -1,6 +1,10 @@
 "use client"
 
-/** Quiet Advocate, sharper spine: verified student proof presented as a poster-scale editorial sequence. */
+/**
+ * Relume Testimonial14 adapted through the Inclusive Visuals, Visual Storyteller,
+ * Brand Guardian, UI Designer, and Finish-Gate personas: only verified repository
+ * stories are shown, with distinct portraits, manual controls, and no fabricated ratings.
+ */
 import { AnimatePresence, motion } from "motion/react"
 import { ArrowLeft, ArrowRight, Quote } from "lucide-react"
 import Image from "next/image"

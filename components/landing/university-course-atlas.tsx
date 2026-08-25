@@ -1,6 +1,10 @@
 "use client"
 
-/** Quiet Advocate, sharper spine: high-contrast partner atlas with direct, accessible course disclosure. */
+/**
+ * Relume Layout403 adapted through the UX Architect, UI Designer, Behavioral Nudge,
+ * Brand Guardian, and Frontend Developer personas: selectable partner tabs reveal
+ * verified course data with clear states, restrained disclosure, and availability context.
+ */
 import { universities } from "@/data/universities"
 import { AnimatePresence, motion } from "motion/react"
 import { ArrowUpRight, CalendarDays, Clock3, MapPin } from "lucide-react"

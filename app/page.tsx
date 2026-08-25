@@ -1,8 +1,11 @@
 "use client"
 
 /**
- * Quiet Advocate, sharper spine: expressive editorial authority, hard asymmetry,
- * real proof, and one clear conversation-led conversion path.
+ * Relume-led page system: Header143 shapes the hero, Timeline5 shapes the process,
+ * Faq3 shapes questions, and Contact6 shapes conversion. Persona Walkthrough,
+ * Content Creator, Behavioral Nudge, Visual Storyteller, and Frontend Developer
+ * responsibilities are applied here through inclusive audience copy, narrative order,
+ * one low-friction action, and accessible production implementation.
  */
 
 import { submitLead, type LeadFormState } from "@/app/actions/submit-lead"
@@ -223,65 +226,48 @@ export default function HomePage() {
 
       <main id="main-content">
         <section className="hero-section relative overflow-hidden border-b border-navy/10">
-          <div aria-hidden="true" className="hero-poster-word">YOUR MOVE</div>
-          <div aria-hidden="true" className="hero-vertical-note">OPEN DOOR / CLEAR PLAN / REAL PERSON</div>
-          <div className="container-wide grid gap-y-12 px-5 py-12 md:px-8 md:py-16 lg:grid-cols-[minmax(0,0.94fr)_minmax(420px,0.86fr)] lg:gap-x-16 lg:py-24 xl:gap-x-24">
-            <div className="relative z-10 flex flex-col justify-between lg:py-6">
+          <div className="container-wide px-5 py-12 md:px-8 md:py-16 lg:py-24">
+            <div className="grid items-end gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
               <BlurFade delay={0.05} direction="up" inView>
                 <p className="eyebrow">University support for every starting point</p>
+                <h1 className="display-hero mt-7">Your next step into university starts with a <span className="text-gold">clear plan.</span></h1>
               </BlurFade>
-              <div className="mt-8 max-w-3xl">
-                <BlurFade delay={0.12} direction="up" inView>
-                  <h1 className="display-hero">Your next step into university starts with a <span className="text-gold">clear plan.</span></h1>
-                </BlurFade>
-                <BlurFade delay={0.2} direction="up" inView>
-                  <p className="mt-7 max-w-xl text-lg leading-8 text-text-muted md:text-xl">
-                    Personal, free guidance whether you are leaving college, returning to learning, or changing direction.
-                  </p>
-                </BlurFade>
-                <BlurFade delay={0.28} direction="up" inView>
-                  <div className="mt-9 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                    <PrimaryLink>Plan your next step</PrimaryLink>
-                    <TextLink href="https://wa.me/447710891277">Ask on WhatsApp</TextLink>
-                  </div>
-                </BlurFade>
-              </div>
-              <BlurFade delay={0.36} direction="up" inView>
-                <p className="mt-12 flex max-w-md items-start gap-3 border-l-2 border-gold pl-4 text-sm leading-6 text-navy/75 lg:mt-20">
+
+              <BlurFade delay={0.14} direction="up" inView className="md:pb-2 lg:pl-6">
+                <p className="max-w-xl text-lg leading-8 text-text-muted md:text-xl">
+                  Personal, free guidance whether you are leaving college, returning to learning, or changing direction.
+                </p>
+                <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+                  <PrimaryLink>Plan your next step</PrimaryLink>
+                  <TextLink href="https://wa.me/447710891277">Ask on WhatsApp</TextLink>
+                </div>
+                <p className="mt-9 flex max-w-lg items-start gap-3 border-l-2 border-gold pl-4 text-sm leading-6 text-navy/75">
                   <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-gold" />
                   A real conversation, honest advice, and no template-driven application process.
                 </p>
               </BlurFade>
             </div>
 
-            <BlurFade delay={0.15} direction="left" inView className="hero-portrait relative min-h-[460px] lg:min-h-[620px]">
-              <div className="absolute inset-0 bg-navy" />
+            <BlurFade delay={0.2} direction="up" inView className="hero-media relative mt-12 min-h-[430px] overflow-hidden bg-navy md:mt-16 md:min-h-[560px] lg:min-h-[680px]">
               <Image
                 src={assets.consultation}
                 alt="Two people having a focused university planning conversation over notes and coffee."
                 fill
                 priority
                 unoptimized
-                sizes="(min-width: 1024px) 45vw, 100vw"
-                className="absolute inset-0 size-full object-cover opacity-90"
+                sizes="(min-width: 1440px) 1440px, 100vw"
+                className="absolute inset-0 size-full object-cover opacity-95"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-navy/10 to-transparent" />
-              <div className="absolute inset-x-6 bottom-6 border border-cream/30 bg-navy/85 p-5 text-cream backdrop-blur md:inset-x-9 md:bottom-9 md:p-7">
+              <div className="absolute inset-0 bg-gradient-to-t from-navy/80 via-transparent to-transparent" />
+              <div className="absolute right-5 bottom-5 left-5 max-w-2xl border border-cream/30 bg-navy/88 p-5 text-cream backdrop-blur md:right-auto md:bottom-9 md:left-9 md:p-8">
                 <p className="text-xs font-bold tracking-[0.15em] text-gold uppercase">The first conversation</p>
-                <p className="mt-3 font-heading text-2xl leading-tight md:text-3xl">
+                <p className="mt-3 font-heading text-2xl leading-tight md:text-4xl">
                   Bring the question that has been sitting with you. We will help you find the next useful answer.
                 </p>
               </div>
-              <div aria-hidden="true" className="absolute -right-3 top-10 hidden size-16 border border-gold/60 lg:block" />
             </BlurFade>
           </div>
         </section>
-
-        <div aria-hidden="true" className="type-ribbon">
-          <div className="type-ribbon-track">
-            <span>YOUR MOVE</span><i>01</i><span>YOUR COURSE</span><i>02</i><span>YOUR FUTURE</span><i>03</i><span>START HERE</span>
-          </div>
-        </div>
 
         <section id="starting-points" className="scroll-mt-24 bg-warm-grey py-20 md:py-28">
           <div className="container-wide px-5 md:px-8">
