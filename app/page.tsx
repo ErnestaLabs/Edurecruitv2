@@ -33,7 +33,6 @@ const assets = {
   consultation: "/manus-storage/edurecruit-consultation-detail_760b38e4.jpg",
   college: "/manus-storage/edurecruit-college-leaver-study_1446a2ea.jpg",
   returning: "/manus-storage/edurecruit-hero-adult-learner_a0fcbda5.jpg",
-  stillLife: "/manus-storage/edurecruit-new-chapter-still-life_df6b1320.jpg",
 }
 
 const navItems = [
@@ -132,6 +131,7 @@ export default function HomePage() {
   const [leadState, setLeadState] = useState<LeadFormState>(emptyLeadState)
   const [isPending, startTransition] = useTransition()
   const [showMobileChatShortcut, setShowMobileChatShortcut] = useState(false)
+  const [contactOpen, setContactOpen] = useState(false)
 
   useEffect(() => {
     const syncMobileChatShortcut = () => {
@@ -149,6 +149,16 @@ export default function HomePage() {
       window.removeEventListener("scroll", syncMobileChatShortcut)
       window.removeEventListener("resize", syncMobileChatShortcut)
     }
+  }, [])
+
+  useEffect(() => {
+    const revealContact = () => {
+      if (window.location.hash === "#contact") setContactOpen(true)
+    }
+
+    revealContact()
+    window.addEventListener("hashchange", revealContact)
+    return () => window.removeEventListener("hashchange", revealContact)
   }, [])
 
   const handleSubmit = (formData: FormData) => {
@@ -266,77 +276,6 @@ export default function HomePage() {
         <AudienceJourney />
 
         <UniversityCourseAtlas />
-
-        <section id="contact" className="scroll-mt-24 relative overflow-hidden bg-navy py-20 text-cream md:py-28">
-          <Image src={assets.stillLife} alt="" fill unoptimized sizes="100vw" className="absolute inset-0 size-full object-cover opacity-[0.16]" />
-          <div className="absolute inset-0 bg-navy/80" />
-          <div className="container-wide relative grid gap-12 px-5 md:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
-            <BlurFade inView direction="up">
-              <h2 className="display-section text-cream">Seen an option that could fit? Let’s make the next step useful.</h2>
-              <p className="mt-6 max-w-xl text-lg leading-8 text-cream/75">
-                Tell us which partner or course caught your eye. We will reply within 24 hours to arrange your free 15-minute chat and help you check the route, intake, and campus fit.
-              </p>
-              <div className="mt-9 space-y-4 text-cream/85">
-                <a className="contact-inline" href="https://wa.me/447710891277" target="_blank" rel="noreferrer">
-                  <MessageCircle aria-hidden="true" className="size-4 text-gold" />
-                  Ask a quick question on WhatsApp
-                </a>
-                <a className="contact-inline" href="tel:+447710891277">
-                  <Phone aria-hidden="true" className="size-4 text-gold" />
-                  Call +44 7710 891277
-                </a>
-              </div>
-            </BlurFade>
-
-            <BlurFade delay={0.1} inView direction="up" className="self-start bg-cream p-6 text-navy shadow-2xl md:p-9">
-              {leadState.success ? (
-                <div className="py-8 text-center">
-                  <CheckCircle2 aria-hidden="true" className="mx-auto size-12 text-success" />
-                  <h3 className="mt-5 font-heading text-4xl">Thank you for getting in touch.</h3>
-                  <p className="mx-auto mt-4 max-w-md leading-7 text-text-muted">
-                    We will contact you within 24 hours to arrange your free 15-minute chat. If you need to speak sooner, you can also message us on WhatsApp.
-                  </p>
-                  <button type="button" className="button-secondary mx-auto mt-7" onClick={() => setLeadState(emptyLeadState)}>
-                    Send another enquiry
-                    <ArrowRight aria-hidden="true" className="size-4" />
-                  </button>
-                </div>
-              ) : (
-                <form action={(formData) => handleSubmit(formData)} className="space-y-5" aria-describedby="contact-help">
-                  <div>
-                    <label htmlFor="name" className="form-label">Your name</label>
-                    <input id="name" name="name" required autoComplete="name" className="form-field" placeholder="Your full name" />
-                    {leadState.errors?.name && <p className="form-error">{leadState.errors.name}</p>}
-                  </div>
-                  <div className="grid gap-5 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="email" className="form-label">Email address</label>
-                      <input id="email" name="email" type="email" autoComplete="email" className="form-field" placeholder="you@example.com" />
-                      {leadState.errors?.email && <p className="form-error">{leadState.errors.email}</p>}
-                    </div>
-                    <div>
-                      <label htmlFor="phone" className="form-label">Phone number</label>
-                      <input id="phone" name="phone" type="tel" autoComplete="tel" className="form-field" placeholder="07700 900000" />
-                      {leadState.errors?.phone && <p className="form-error">{leadState.errors.phone}</p>}
-                    </div>
-                  </div>
-                  <div>
-                    <label htmlFor="message" className="form-label">Which option would you like to talk through?</label>
-                    <textarea id="message" name="message" rows={4} className="form-field resize-y" placeholder="For example, I am interested in Business Management at ARU London, or I want to compare part-time options..." />
-                  </div>
-                  <p id="contact-help" className="text-sm leading-6 text-text-muted">
-                    Share an email address or phone number. We will reply within 24 hours to arrange your free 15-minute chat.
-                  </p>
-                  {leadState.message && <p role="alert" className="rounded-md bg-red-50 p-3 text-sm text-red-700">{leadState.message}</p>}
-                  <button type="submit" disabled={isPending} className="button-primary w-full justify-center disabled:cursor-not-allowed disabled:opacity-60">
-                    {isPending ? "Sending your enquiry..." : "Arrange my free 15-minute chat"}
-                    <ArrowUpRight aria-hidden="true" className="size-4" />
-                  </button>
-                </form>
-              )}
-            </BlurFade>
-          </div>
-        </section>
 
         <TestimonialShowcase />
 
@@ -472,6 +411,83 @@ export default function HomePage() {
                   )
                 })}
               </div>
+            </BlurFade>
+          </div>
+        </section>
+
+        <section id="contact" className="scroll-mt-24 border-t border-navy/15 bg-warm-grey py-14 md:py-20">
+          <div className="container-wide grid gap-8 px-5 md:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+            <BlurFade inView direction="up">
+              <h2 className="display-section">Ready when you are.</h2>
+              <p className="mt-5 max-w-lg text-lg leading-8 text-text-muted">
+                Bring the question, course, or university option you want to understand better. We will reply within 24 hours to arrange your free 15-minute chat.
+              </p>
+              <div className="mt-7 flex flex-wrap gap-x-5 gap-y-3">
+                <a className="button-secondary" href="https://wa.me/447710891277" target="_blank" rel="noreferrer">
+                  <MessageCircle aria-hidden="true" className="size-4 text-gold" />
+                  WhatsApp
+                </a>
+                <a className="button-secondary" href="tel:+447710891277">
+                  <Phone aria-hidden="true" className="size-4 text-gold" />
+                  Call +44 7710 891277
+                </a>
+              </div>
+            </BlurFade>
+
+            <BlurFade delay={0.08} inView direction="up" className="border-y border-navy/15">
+              <details className="contact-disclosure" open={contactOpen} onToggle={(event) => setContactOpen(event.currentTarget.open)}>
+                <summary>
+                  Arrange a free 15-minute chat
+                  <ArrowUpRight aria-hidden="true" className="size-5 shrink-0 text-gold" />
+                </summary>
+                <div className="pb-2 pt-6">
+                  {leadState.success ? (
+                    <div className="pb-8">
+                      <CheckCircle2 aria-hidden="true" className="size-10 text-success" />
+                      <h3 className="mt-4 font-heading text-4xl">Thank you for getting in touch.</h3>
+                      <p className="mt-3 max-w-md leading-7 text-text-muted">
+                        We will contact you within 24 hours to arrange your free 15-minute chat. If you need to speak sooner, you can also message us on WhatsApp.
+                      </p>
+                      <button type="button" className="button-secondary mt-6" onClick={() => setLeadState(emptyLeadState)}>
+                        Send another enquiry
+                        <ArrowRight aria-hidden="true" className="size-4" />
+                      </button>
+                    </div>
+                  ) : (
+                    <form action={(formData) => handleSubmit(formData)} className="space-y-5 pb-8" aria-describedby="contact-help">
+                      <div>
+                        <label htmlFor="name" className="form-label">Your name</label>
+                        <input id="name" name="name" required autoComplete="name" className="form-field" placeholder="Your full name" />
+                        {leadState.errors?.name && <p className="form-error">{leadState.errors.name}</p>}
+                      </div>
+                      <div className="grid gap-5 sm:grid-cols-2">
+                        <div>
+                          <label htmlFor="email" className="form-label">Email address</label>
+                          <input id="email" name="email" type="email" autoComplete="email" className="form-field" placeholder="you@example.com" />
+                          {leadState.errors?.email && <p className="form-error">{leadState.errors.email}</p>}
+                        </div>
+                        <div>
+                          <label htmlFor="phone" className="form-label">Phone number</label>
+                          <input id="phone" name="phone" type="tel" autoComplete="tel" className="form-field" placeholder="07700 900000" />
+                          {leadState.errors?.phone && <p className="form-error">{leadState.errors.phone}</p>}
+                        </div>
+                      </div>
+                      <div>
+                        <label htmlFor="message" className="form-label">What would you like to talk through?</label>
+                        <textarea id="message" name="message" rows={4} className="form-field resize-y" placeholder="For example, I am comparing course options, returning to study, or unsure where to begin..." />
+                      </div>
+                      <p id="contact-help" className="text-sm leading-6 text-text-muted">
+                        Share an email address or phone number. We will reply within 24 hours to arrange your free 15-minute chat.
+                      </p>
+                      {leadState.message && <p role="alert" className="rounded-md bg-red-50 p-3 text-sm text-red-700">{leadState.message}</p>}
+                      <button type="submit" disabled={isPending} className="button-primary w-full justify-center disabled:cursor-not-allowed disabled:opacity-60">
+                        {isPending ? "Sending your enquiry..." : "Arrange my free 15-minute chat"}
+                        <ArrowUpRight aria-hidden="true" className="size-4" />
+                      </button>
+                    </form>
+                  )}
+                </div>
+              </details>
             </BlurFade>
           </div>
         </section>
