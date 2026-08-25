@@ -14,6 +14,8 @@ const testimonials = [
   {
     quote:
       "I wasn’t sure if I was ready to apply for university, but Valentina explained everything step by step and made the whole process much less stressful. She helped me with my application, CV, and personal statement, and was always available whenever I had questions. I really appreciated her patience and honesty throughout the entire process.",
+    excerpt:
+      "I wasn’t sure if I was ready to apply for university, but Valentina explained everything step by step and made the whole process much less stressful.",
     name: "Andrea",
     designation: "Recent graduate",
     src: "/images/Andrea.jpg",
@@ -21,6 +23,8 @@ const testimonials = [
   {
     quote:
       "Excellent service from start to finish. Communication was always quick, and I was kept updated throughout every stage of my application. I never felt rushed or pressured, and everything was explained clearly. I would definitely recommend VM Education Recruitment to anyone looking for support with university applications.",
+    excerpt:
+      "Communication was always quick, and I was kept updated throughout every stage of my application. I never felt rushed or pressured, and everything was explained clearly.",
     name: "Razvan Rosca",
     designation: "Recent graduate",
     src: "/images/Razvan Rosca.png",
@@ -28,6 +32,8 @@ const testimonials = [
   {
     quote:
       "I received amazing service from Carlotta! She helped me every step of the way, from showing me different university options to assisting me with my applications. She supported me throughout the entire process, and whenever I had a question, she was always there to help. I would highly recommend her. She is fast, knowledgeable, and kind.",
+    excerpt:
+      "She helped me every step of the way, from showing me different university options to assisting me with my applications. She supported me throughout the entire process.",
     name: "Giulia Conti",
     designation: "Recent graduate",
     src: "/images/5289.jpg",
@@ -43,8 +49,8 @@ export function TestimonialShowcase() {
 
   return (
     <section id="stories" aria-labelledby="stories-title" className="scroll-mt-24 overflow-hidden bg-gold text-navy">
-      <div className="container-wide grid min-h-[760px] lg:grid-cols-[1.02fr_0.98fr]">
-        <div className="relative min-h-[520px] overflow-hidden bg-navy lg:min-h-full">
+      <div className="container-wide grid min-h-[680px] lg:grid-cols-[1.02fr_0.98fr]">
+        <div className="relative min-h-[480px] overflow-hidden bg-navy lg:min-h-full">
           <AnimatePresence mode="wait">
             <motion.div
               key={active.src}
@@ -81,8 +87,8 @@ export function TestimonialShowcase() {
           </div>
         </div>
 
-        <div className="relative flex flex-col justify-between px-5 py-16 md:px-10 md:py-20 lg:px-14 lg:py-24">
-          <Quote aria-hidden="true" className="size-14 fill-navy text-navy" strokeWidth={1.5} />
+        <div className="relative flex flex-col justify-between px-5 py-12 md:px-10 md:py-14 lg:px-14 lg:py-16">
+          <Quote aria-hidden="true" className="size-11 fill-navy text-navy" strokeWidth={1.5} />
           <AnimatePresence mode="wait">
             <motion.blockquote
               key={active.name}
@@ -90,15 +96,19 @@ export function TestimonialShowcase() {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.28, ease: [0.23, 1, 0.32, 1] }}
-              className="my-12"
+              className="my-8"
             >
-              <p id="stories-title" className="font-heading text-[clamp(2.5rem,4.6vw,5.2rem)] leading-[0.96] tracking-[-0.035em]">
-                “{active.quote}”
+              <p id="stories-title" className="max-w-[19ch] font-heading text-[clamp(2.15rem,3.2vw,3.6rem)] leading-[1.01] tracking-[-0.03em]">
+                “{active.excerpt}”
               </p>
-              <footer className="mt-8 border-t border-navy/30 pt-6">
+              <footer className="mt-6 border-t border-navy/30 pt-5">
                 <p className="text-lg font-extrabold">{active.name}</p>
                 <p className="mt-1 text-sm text-navy/65">{active.designation}</p>
               </footer>
+              <details className="story-full-quote mt-5 max-w-2xl text-sm leading-6 text-navy/75">
+                <summary>Read the full story</summary>
+                <p className="mt-3">“{active.quote}”</p>
+              </details>
             </motion.blockquote>
           </AnimatePresence>
 

@@ -75,6 +75,11 @@ const services = [
 
 const faqs = [
   {
+    question: "Is the support really free?",
+    answer:
+      "Yes. EduRecruitment’s student support is free. We will explain how the service works clearly when you speak with us.",
+  },
+  {
     question: "I am leaving college. Where do I start?",
     answer:
       "Start with the questions you already have. We can talk through courses, entry routes, what makes a strong application, and the next step that makes sense for you.",
@@ -93,11 +98,6 @@ const faqs = [
     question: "Can university work around my job or family?",
     answer:
       "The answer depends on the course and your circumstances. We can help you explore options and the practical questions you need to ask before you apply.",
-  },
-  {
-    question: "Is the support really free?",
-    answer:
-      "Yes. EduRecruitment’s student support is free. We will explain how the service works clearly when you speak with us.",
   },
   {
     question: "Can you guarantee that I will get an offer or funding?",
@@ -128,7 +128,7 @@ function TextLink({ children, href }: { children: React.ReactNode; href: string 
 
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false)
-  const [openFaq, setOpenFaq] = useState<number | null>(null)
+  const [openFaq, setOpenFaq] = useState<number | null>(0)
   const [leadState, setLeadState] = useState<LeadFormState>(emptyLeadState)
   const [isPending, startTransition] = useTransition()
 
@@ -248,17 +248,16 @@ export default function HomePage() {
 
         <TestimonialShowcase />
 
-        <section id="how-it-works" className="scroll-mt-24 bg-cream py-20 md:py-32">
+        <section id="how-it-works" className="scroll-mt-24 bg-cream py-14 md:py-24">
           <div className="container-wide px-5 md:px-8">
             <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:gap-24">
               <BlurFade inView direction="up" className="lg:sticky lg:top-32 lg:self-start">
-                <p className="eyebrow">A considered way forward</p>
-                <h2 className="display-section mt-5">From one honest conversation to a plan you can act on.</h2>
-                <p className="mt-6 max-w-lg text-lg leading-8 text-text-muted">
+                <h2 className="display-section">From one honest conversation to a plan you can act on.</h2>
+                <p className="mt-5 max-w-lg text-base leading-7 text-text-muted md:text-lg md:leading-8">
                   No pressure to know the perfect course before you speak. We start with your context, then make the next step visible.
                 </p>
-                <div className="mt-8 hidden lg:block">
-                  <TextLink href="#contact">Start with a conversation</TextLink>
+                <div className="mt-7 hidden lg:block">
+                  <PrimaryLink>Start a free 15-minute chat</PrimaryLink>
                 </div>
               </BlurFade>
 
@@ -271,10 +270,10 @@ export default function HomePage() {
                           0{index + 1}
                         </span>
                       </div>
-                      <div className="pb-10 sm:pb-16">
+                      <div className="pb-7 sm:pb-10">
                         <p className="text-xs font-bold tracking-[0.14em] text-gold uppercase">{step.eyebrow}</p>
                         <h3 className="mt-3 font-heading text-4xl text-navy md:text-5xl">{step.title}</h3>
-                        <p className="mt-4 max-w-2xl text-lg leading-8 text-text-muted">{step.description}</p>
+                        <p className="mt-3 max-w-2xl text-base leading-7 text-text-muted md:text-lg md:leading-8">{step.description}</p>
                       </div>
                     </article>
                   </BlurFade>
@@ -350,16 +349,15 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="questions" className="scroll-mt-24 bg-cream py-20 md:py-28">
-          <div className="container-wide grid gap-12 px-5 md:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
+        <section id="questions" className="scroll-mt-24 bg-cream py-14 md:py-20">
+          <div className="container-wide grid gap-9 px-5 md:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
             <BlurFade inView direction="up">
-              <p className="eyebrow">Questions, answered clearly</p>
-              <h2 className="display-section mt-5">The questions worth asking before you apply.</h2>
-              <p className="mt-6 max-w-md text-lg leading-8 text-text-muted">
+              <h2 className="display-section">Questions, answered clearly.</h2>
+              <p className="mt-5 max-w-md text-lg leading-8 text-text-muted">
                 If your question is not here, it is still a good question. Start a conversation and ask it directly.
               </p>
-              <div className="mt-8">
-                <TextLink href="#contact">Ask your question</TextLink>
+              <div className="mt-7">
+                <PrimaryLink>Start a free 15-minute chat</PrimaryLink>
               </div>
             </BlurFade>
             <BlurFade delay={0.12} inView direction="up">
@@ -393,10 +391,9 @@ export default function HomePage() {
           <div className="absolute inset-0 bg-navy/80" />
           <div className="container-wide relative grid gap-12 px-5 md:px-8 lg:grid-cols-[0.85fr_1.15fr] lg:gap-24">
             <BlurFade inView direction="up">
-              <p className="eyebrow text-gold">Start with one conversation</p>
-              <h2 className="display-section mt-5 text-cream">Let’s make your next step feel more possible.</h2>
+              <h2 className="display-section text-cream">Let’s make your next step feel more possible.</h2>
               <p className="mt-6 max-w-xl text-lg leading-8 text-cream/75">
-                Tell us a little about where you are now. Share an email address or phone number, and we will use the detail you provide to get back in touch.
+                Tell us a little about where you are now. We will reply within 24 hours to arrange your free 15-minute chat and identify the next useful step.
               </p>
               <div className="mt-9 space-y-4 text-cream/85">
                 <a className="contact-inline" href="https://wa.me/447710891277" target="_blank" rel="noreferrer">
@@ -416,7 +413,7 @@ export default function HomePage() {
                   <CheckCircle2 aria-hidden="true" className="mx-auto size-12 text-success" />
                   <h3 className="mt-5 font-heading text-4xl">Thank you for getting in touch.</h3>
                   <p className="mx-auto mt-4 max-w-md leading-7 text-text-muted">
-                    We will contact you using the details you shared. If you need to speak sooner, you can also message us on WhatsApp.
+                    We will contact you within 24 hours to arrange your free 15-minute chat. If you need to speak sooner, you can also message us on WhatsApp.
                   </p>
                   <button type="button" className="button-secondary mx-auto mt-7" onClick={() => setLeadState(emptyLeadState)}>
                     Send another enquiry
@@ -451,11 +448,11 @@ export default function HomePage() {
                     <textarea id="message" name="message" rows={4} className="form-field resize-y" placeholder="For example, I’m leaving college and considering nursing, or I’m thinking about returning to study..." />
                   </div>
                   <p id="contact-help" className="text-sm leading-6 text-text-muted">
-                    Please share an email address or phone number so we can reply.
+                    Share an email address or phone number. We will reply within 24 hours to arrange your free 15-minute chat.
                   </p>
                   {leadState.message && <p role="alert" className="rounded-md bg-red-50 p-3 text-sm text-red-700">{leadState.message}</p>}
                   <button type="submit" disabled={isPending} className="button-primary w-full justify-center disabled:cursor-not-allowed disabled:opacity-60">
-                    {isPending ? "Sending your enquiry..." : "Start the conversation"}
+                    {isPending ? "Sending your enquiry..." : "Arrange my free 15-minute chat"}
                     <ArrowUpRight aria-hidden="true" className="size-4" />
                   </button>
                 </form>
