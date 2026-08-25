@@ -9,6 +9,7 @@
  */
 
 import { submitLead, type LeadFormState } from "@/app/actions/submit-lead"
+import { AudienceJourney } from "@/components/landing/audience-journey"
 import { TestimonialShowcase } from "@/components/landing/testimonial-showcase"
 import { UniversityCourseAtlas } from "@/components/landing/university-course-atlas"
 import { BlurFade } from "@/components/ui/blur-fade"
@@ -36,37 +37,11 @@ const assets = {
 }
 
 const navItems = [
+  { label: "Your starting point", href: "#starting-points" },
+  { label: "Student stories", href: "#stories" },
   { label: "How it works", href: "#how-it-works" },
   { label: "Partners & courses", href: "#courses" },
-  { label: "Student stories", href: "#stories" },
   { label: "Questions", href: "#questions" },
-]
-
-const pathways = [
-  {
-    number: "01",
-    title: "Leaving college",
-    description:
-      "You have the qualifications, the questions, and a big decision ahead. We help you make sense of your options and present your strongest application.",
-    image: assets.college,
-    alt: "A college learner making notes while planning their university choices.",
-  },
-  {
-    number: "02",
-    title: "Returning to learning",
-    description:
-      "You are ready to study again, but your life has changed. Together we look at the course, route, timing, and support that make sense for you now.",
-    image: assets.returning,
-    alt: "An adult learner reviewing study notes at a kitchen table.",
-  },
-  {
-    number: "03",
-    title: "Changing direction",
-    description:
-      "You know your current path is not the final one. We help you turn a career ambition into a practical university plan.",
-    image: assets.stillLife,
-    alt: "A notebook, pen, and mug arranged on a desk in warm afternoon light.",
-  },
 ]
 
 const process = [
@@ -172,14 +147,14 @@ export default function HomePage() {
 
       <header className="sticky top-0 z-50 border-b border-navy/10 bg-cream/92 backdrop-blur-xl">
         <div className="container-wide flex h-20 items-center justify-between px-5 md:px-8">
-          <Link href="/" aria-label="EduRecruitment home" className="group flex items-center gap-3">
+          <Link href="/" aria-label="EduRecruitment home" className="group flex min-w-[175px] items-center gap-3">
             <Image aria-hidden="true" src={assets.logo} alt="" width={40} height={40} unoptimized className="size-10 object-contain" />
             <span className="font-heading text-[1.7rem] leading-none tracking-tight text-navy">
               Edu<span className="text-gold">Recruitment</span>
             </span>
           </Link>
 
-          <nav aria-label="Primary navigation" className="hidden items-center gap-7 lg:flex">
+          <nav aria-label="Primary navigation" className="hidden items-center gap-5 lg:flex">
             {navItems.map((item) => (
               <a key={item.href} href={item.href} className="nav-link">
                 {item.label}
@@ -188,7 +163,7 @@ export default function HomePage() {
           </nav>
 
           <div className="hidden lg:block">
-            <PrimaryLink>Talk through your options</PrimaryLink>
+            <PrimaryLink>Start a free 15-minute chat</PrimaryLink>
           </div>
 
           <button
@@ -216,7 +191,7 @@ export default function HomePage() {
                 </a>
               ))}
               <a href="#contact" onClick={() => setMenuOpen(false)} className="button-primary mt-3 w-full justify-center">
-                Talk through your options
+                Start a free 15-minute chat
                 <ArrowUpRight aria-hidden="true" className="size-4" />
               </a>
             </div>
@@ -229,21 +204,21 @@ export default function HomePage() {
           <div className="container-wide px-5 py-12 md:px-8 md:py-16 lg:py-24">
             <div className="grid items-end gap-10 md:grid-cols-2 md:gap-16 lg:gap-24">
               <BlurFade delay={0.05} direction="up" inView>
-                <p className="eyebrow">University support for every starting point</p>
-                <h1 className="display-hero mt-7">Your next step into university starts with a <span className="text-gold">clear plan.</span></h1>
+                <p className="eyebrow">Free UK university application guidance</p>
+                <h1 className="display-hero mt-7">University applications feel complicated. Your first step <span className="text-gold">doesn’t have to.</span></h1>
               </BlurFade>
 
               <BlurFade delay={0.14} direction="up" inView className="md:pb-2 lg:pl-6">
                 <p className="max-w-xl text-lg leading-8 text-text-muted md:text-xl">
-                  Personal, free guidance whether you are leaving college, returning to learning, or changing direction.
+                  One-to-one support for college leavers, returning learners, and career changers. Compare routes, prepare your application, and understand the next step before you commit.
                 </p>
                 <div className="mt-8 flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-                  <PrimaryLink>Plan your next step</PrimaryLink>
-                  <TextLink href="https://wa.me/447710891277">Ask on WhatsApp</TextLink>
+                  <PrimaryLink>Start a free 15-minute chat</PrimaryLink>
+                  <TextLink href="https://wa.me/447710891277">Message us on WhatsApp</TextLink>
                 </div>
                 <p className="mt-9 flex max-w-lg items-start gap-3 border-l-2 border-gold pl-4 text-sm leading-6 text-navy/75">
                   <Check aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-gold" />
-                  A real conversation, honest advice, and no template-driven application process.
+                  Free for students. One dedicated consultant. Honest guidance, with no promise of an offer or funding decision.
                 </p>
               </BlurFade>
             </div>
@@ -269,39 +244,9 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section id="starting-points" className="scroll-mt-24 bg-warm-grey py-20 md:py-28">
-          <div className="container-wide px-5 md:px-8">
-            <div className="grid gap-10 border-b border-navy/15 pb-12 md:grid-cols-[0.82fr_1.18fr] md:items-end md:gap-20 md:pb-16">
-              <BlurFade inView direction="up">
-                <p className="eyebrow">Wherever you are starting</p>
-                <h2 className="display-section mt-5">The right support does not make assumptions about your life.</h2>
-              </BlurFade>
-              <BlurFade delay={0.1} inView direction="up">
-                <p className="max-w-xl text-lg leading-8 text-text-muted">
-                  University is not one journey. You might be making a first choice, returning after time away, or looking for a new direction. Your plan should begin there.
-                </p>
-              </BlurFade>
-            </div>
+        <AudienceJourney />
 
-            <div className="mt-10 grid gap-5 md:mt-14 md:grid-cols-3">
-              {pathways.map((pathway, index) => (
-                <BlurFade key={pathway.title} delay={0.08 * index} inView direction="up" className="group">
-                  <article className="pathway-card h-full">
-                    <div className="relative h-56 overflow-hidden bg-navy">
-                      <Image src={pathway.image} alt={pathway.alt} fill unoptimized sizes="(min-width: 768px) 33vw, 100vw" className="size-full object-cover transition duration-700 group-hover:scale-105" />
-                      <div className="absolute inset-0 bg-gradient-to-t from-navy/55 via-transparent to-transparent" />
-                      <span className="absolute bottom-4 left-5 font-heading text-3xl text-cream">{pathway.number}</span>
-                    </div>
-                    <div className="p-6 md:p-7">
-                      <h3 className="font-heading text-3xl text-navy">{pathway.title}</h3>
-                      <p className="mt-4 leading-7 text-text-muted">{pathway.description}</p>
-                    </div>
-                  </article>
-                </BlurFade>
-              ))}
-            </div>
-          </div>
-        </section>
+        <TestimonialShowcase />
 
         <section id="how-it-works" className="scroll-mt-24 bg-cream py-20 md:py-32">
           <div className="container-wide px-5 md:px-8">
@@ -336,6 +281,18 @@ export default function HomePage() {
                 ))}
               </div>
             </div>
+          </div>
+        </section>
+
+        <section className="bg-gold text-navy">
+          <div className="container-wide grid gap-8 px-5 py-10 md:grid-cols-[1fr_auto] md:items-center md:px-8 md:py-12">
+            <div>
+              <p className="text-xs font-extrabold tracking-[0.14em] uppercase">Use a practical guide before we speak</p>
+              <h2 className="mt-3 max-w-3xl font-heading text-3xl leading-tight md:text-5xl">Writing a personal statement? Start with the questions that make it specific.</h2>
+            </div>
+            <Link href="/resources/personal-statement-guide" className="inline-flex min-h-12 w-fit items-center gap-3 border-b border-navy pb-2 text-sm font-extrabold">
+              Read the personal statement guide <ArrowUpRight aria-hidden="true" className="size-4" />
+            </Link>
           </div>
         </section>
 
@@ -392,8 +349,6 @@ export default function HomePage() {
             </div>
           </div>
         </section>
-
-        <TestimonialShowcase />
 
         <section id="questions" className="scroll-mt-24 bg-cream py-20 md:py-28">
           <div className="container-wide grid gap-12 px-5 md:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">

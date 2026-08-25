@@ -82,6 +82,9 @@ export function UniversityCourseAtlas() {
               <Link href={`/universities/${activeUniversity.slug}`} className="mt-9 inline-flex w-fit items-center gap-3 border-b border-gold pb-2 text-sm font-extrabold text-gold">
                 View partner details <ArrowUpRight aria-hidden="true" className="size-4" />
               </Link>
+              <a href="#contact" className="button-primary mt-5 w-fit">
+                Ask about {activeUniversity.shortName} <ArrowUpRight aria-hidden="true" className="size-4" />
+              </a>
             </div>
 
             <div>
