@@ -32,7 +32,7 @@ export function UniversityCourseAtlas() {
           </p>
         </div>
 
-        <div role="tablist" aria-label="University partners" className="partner-tabs mt-5 grid auto-cols-[minmax(146px,78%)] grid-flow-col border-l border-t border-cream/20 md:auto-cols-auto md:grid-flow-row md:grid-cols-3 lg:grid-cols-5">
+        <div role="tablist" aria-label="University partners" className="partner-tabs mt-5 grid auto-cols-[minmax(164px,78%)] grid-flow-col md:auto-cols-auto md:grid-flow-row md:grid-cols-3 lg:grid-cols-5">
           {universities.map((university) => {
             const selected = university.slug === activeUniversity.slug
             return (
@@ -45,10 +45,10 @@ export function UniversityCourseAtlas() {
                 onClick={() => setActiveSlug(university.slug)}
                 className={`partner-tab ${selected ? "partner-tab-active" : ""}`}
               >
-                <span className="partner-logo-plate relative flex h-12 w-full items-center justify-center">
-                  <Image src={university.logo} alt={`${university.name} logo`} width={168} height={80} unoptimized className="max-h-12 w-auto max-w-[88%] object-contain" />
+                <span className="partner-logo-stage relative flex h-16 w-full items-center justify-start md:h-[4.5rem]">
+                  <Image src={university.logo} alt={`${university.name} logo`} width={260} height={112} unoptimized className="h-full w-auto max-w-full object-contain object-left" />
                 </span>
-                <span className="text-left text-xs font-bold tracking-[0.1em] uppercase">{university.shortName}</span>
+                <span className="text-left text-[0.68rem] font-bold tracking-[0.1em] uppercase">{university.shortName}</span>
               </button>
             )
           })}
