@@ -1,11 +1,13 @@
 "use client"
 
 /**
- * Quiet Advocate design system: calm editorial authority, warm paper surfaces,
- * left-weighted composition, and one clear conversation-led conversion path.
+ * Quiet Advocate, sharper spine: expressive editorial authority, hard asymmetry,
+ * real proof, and one clear conversation-led conversion path.
  */
 
 import { submitLead, type LeadFormState } from "@/app/actions/submit-lead"
+import { TestimonialShowcase } from "@/components/landing/testimonial-showcase"
+import { UniversityCourseAtlas } from "@/components/landing/university-course-atlas"
 import { BlurFade } from "@/components/ui/blur-fade"
 import {
   ArrowRight,
@@ -32,8 +34,8 @@ const assets = {
 
 const navItems = [
   { label: "How it works", href: "#how-it-works" },
-  { label: "Your starting point", href: "#starting-points" },
-  { label: "Our approach", href: "#our-approach" },
+  { label: "Partners & courses", href: "#courses" },
+  { label: "Student stories", href: "#stories" },
   { label: "Questions", href: "#questions" },
 ]
 
@@ -220,7 +222,9 @@ export default function HomePage() {
       </header>
 
       <main id="main-content">
-        <section className="hero-section relative border-b border-navy/10">
+        <section className="hero-section relative overflow-hidden border-b border-navy/10">
+          <div aria-hidden="true" className="hero-poster-word">YOUR MOVE</div>
+          <div aria-hidden="true" className="hero-vertical-note">OPEN DOOR / CLEAR PLAN / REAL PERSON</div>
           <div className="container-wide grid gap-y-12 px-5 py-12 md:px-8 md:py-16 lg:grid-cols-[minmax(0,0.94fr)_minmax(420px,0.86fr)] lg:gap-x-16 lg:py-24 xl:gap-x-24">
             <div className="relative z-10 flex flex-col justify-between lg:py-6">
               <BlurFade delay={0.05} direction="up" inView>
@@ -228,7 +232,7 @@ export default function HomePage() {
               </BlurFade>
               <div className="mt-8 max-w-3xl">
                 <BlurFade delay={0.12} direction="up" inView>
-                  <h1 className="display-hero">Your next step into university starts with a clear plan.</h1>
+                  <h1 className="display-hero">Your next step into university starts with a <span className="text-gold">clear plan.</span></h1>
                 </BlurFade>
                 <BlurFade delay={0.2} direction="up" inView>
                   <p className="mt-7 max-w-xl text-lg leading-8 text-text-muted md:text-xl">
@@ -250,7 +254,7 @@ export default function HomePage() {
               </BlurFade>
             </div>
 
-            <BlurFade delay={0.15} direction="left" inView className="relative min-h-[460px] lg:min-h-[620px]">
+            <BlurFade delay={0.15} direction="left" inView className="hero-portrait relative min-h-[460px] lg:min-h-[620px]">
               <div className="absolute inset-0 bg-navy" />
               <Image
                 src={assets.consultation}
@@ -272,6 +276,12 @@ export default function HomePage() {
             </BlurFade>
           </div>
         </section>
+
+        <div aria-hidden="true" className="type-ribbon">
+          <div className="type-ribbon-track">
+            <span>YOUR MOVE</span><i>01</i><span>YOUR COURSE</span><i>02</i><span>YOUR FUTURE</span><i>03</i><span>START HERE</span>
+          </div>
+        </div>
 
         <section id="starting-points" className="scroll-mt-24 bg-warm-grey py-20 md:py-28">
           <div className="container-wide px-5 md:px-8">
@@ -363,6 +373,8 @@ export default function HomePage() {
           </div>
         </section>
 
+        <UniversityCourseAtlas />
+
         <section id="our-approach" className="scroll-mt-24 bg-warm-grey py-20 md:py-32">
           <div className="container-wide px-5 md:px-8">
             <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-20">
@@ -394,6 +406,8 @@ export default function HomePage() {
             </div>
           </div>
         </section>
+
+        <TestimonialShowcase />
 
         <section id="questions" className="scroll-mt-24 bg-cream py-20 md:py-28">
           <div className="container-wide grid gap-12 px-5 md:px-8 lg:grid-cols-[0.72fr_1.28fr] lg:gap-24">
