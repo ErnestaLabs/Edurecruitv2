@@ -5,7 +5,7 @@
  * UX Architect, UI Designer, Behavioral Nudge, and Finish-Gate responsibilities.
  * Each visitor can select a starting point and see tailored decisions and next steps.
  */
-import { ArrowUpRight, Check } from "lucide-react"
+import { ArrowRight, Check } from "lucide-react"
 import Image from "next/image"
 import { useState } from "react"
 
@@ -107,8 +107,8 @@ export function AudienceJourney() {
               ))}
             </div>
 
-            <a href="#contact" className="button-primary mt-7 w-fit">
-              Talk through this starting point <ArrowUpRight aria-hidden="true" className="size-4" />
+            <a href="#courses" className="button-primary mt-7 w-fit">
+              See course options <ArrowRight aria-hidden="true" className="size-4" />
             </a>
           </div>
         </div>

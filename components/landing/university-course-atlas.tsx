@@ -26,7 +26,7 @@ export function UniversityCourseAtlas() {
             </h2>
           </div>
           <p className="max-w-2xl text-lg leading-8 text-cream/72 lg:pb-2">
-            Select a university logo to explore the courses currently listed in our guide. Your consultant can help you check which route, intake, and campus fit your circumstances.
+            Select a university logo to compare the courses currently listed in our guide. Then bring the option that interests you to a free 15-minute chat so we can help you check the route, intake, and campus fit.
           </p>
         </div>
 
@@ -101,7 +101,7 @@ export function UniversityCourseAtlas() {
                   </li>
                 ))}
               </ol>
-              <p className="mt-6 text-sm leading-6 text-cream/55">Course and intake availability can change. Speak with EduRecruitment to confirm the current options for your application.</p>
+              <p className="mt-6 text-sm leading-6 text-cream/55">Course and intake availability can change. Tell us which option interests you and we will help you confirm the current route for your application.</p>
             </div>
           </motion.div>
         </AnimatePresence>

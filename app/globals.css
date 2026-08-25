@@ -161,6 +161,9 @@
   .story-tab-active { background: #10263b; color: #fcfbf7; transform: translateY(-4px); }
   .story-full-quote summary { width: fit-content; cursor: pointer; border-bottom: 1px solid rgba(16, 38, 59, 0.35); padding-bottom: 0.2rem; font-weight: 800; }
   .story-full-quote summary:hover { border-color: #10263b; }
+  .mobile-chat-shortcut { position: fixed; right: 1rem; bottom: calc(env(safe-area-inset-bottom) + 1rem); z-index: 50; display: inline-flex; align-items: center; gap: 0.65rem; min-height: 3rem; border: 1px solid rgba(252, 251, 247, 0.5); border-radius: 999px; background: #10263b; padding: 0.75rem 1rem; color: #fcfbf7; box-shadow: 0 12px 28px rgba(16, 38, 59, 0.3); font-size: 0.8125rem; font-weight: 800; transition: transform 160ms ease-out, background-color 160ms ease-out; }
+  .mobile-chat-shortcut:hover { transform: translateY(-2px); background: #1b405e; }
+  .mobile-chat-shortcut:active { transform: scale(0.97); }
 }
 
 @media (min-width: 640px) {
