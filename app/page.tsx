@@ -12,7 +12,7 @@ import { UniversityCourseAtlas } from "@/components/landing/university-course-at
 import { ArrowRight, ArrowUpRight, Check, CheckCircle2, ChevronDown, Menu, MessageCircle, Phone, X } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
-import { useEffect, useState, useTransition } from "react"
+import { useEffect, useRef, useState, useTransition } from "react"
 
 const assets = {
   logo: "/manus-storage/edurecruit-logo-mark_4dd97337.png",
@@ -35,8 +35,8 @@ const preparation = [
 const topics = ["Choosing a course or university", "Application or personal statement", "Returning to study"] as const
 
 const faqs = [
-  { question: "Is the support really free?", answer: "Yes. EduRecruitment’s student support is free. We explain how the service works clearly when you speak with us." },
   { question: "What happens in the 15-minute conversation?", answer: "You bring the question you are currently working through. We clarify the useful options, practical constraints, and next question or action to take." },
+  { question: "Is the support really free?", answer: "Yes. EduRecruitment’s student support is free. We explain how the service works clearly when you speak with us." },
   { question: "Can I ask about a specific university or course?", answer: "Yes. Choose a partner option above or describe the course question in the form. We can help you identify what needs comparing or checking next." },
   { question: "I have been away from education for a while. Can I still speak with you?", answer: "Yes. Returning to education brings different practical questions. The first conversation is a place to make those questions clearer before you decide what to do." },
 ]
@@ -50,6 +50,9 @@ export default function HomePage() {
   const [openFaq, setOpenFaq] = useState(0)
   const [leadState, setLeadState] = useState<LeadFormState>(emptyLeadState)
   const [isPending, startTransition] = useTransition()
+  const topicRef = useRef("")
+  const contactTopic = formTopic || "I would like to talk through my university options."
+  const whatsappHref = `https://wa.me/447710891277?text=${encodeURIComponent(`Hello, ${contactTopic}`)}`
 
   useEffect(() => {
     if (window.location.hash === "#contact") document.getElementById("contact")?.scrollIntoView()
@@ -65,7 +68,13 @@ export default function HomePage() {
 
   const startPlan = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    moveToContact(topic || "I would like to talk through my university options.")
+    moveToContact(topicRef.current || topic || "I would like to talk through my university options.")
+  }
+
+  const selectTopic = (nextTopic: string) => {
+    topicRef.current = nextTopic
+    setTopic(nextTopic)
+    setFormTopic(nextTopic)
   }
 
   const handleSubmit = (formData: FormData) => {
@@ -102,18 +111,18 @@ export default function HomePage() {
               <p>Bring your course, question, or situation. Leave knowing what to ask, compare, or do next.</p>
             </div>
 
-              <figure className="hero-evidence hero-evidence-reveal">
+              <figure className="hero-evidence hero-evidence-slot">
                 <ConsultationHeroMotion imageSrc={assets.consultation} />
                 <figcaption>One focused conversation before a high-stakes choice.</figcaption>
                 <span className="sr-only">A short visual explanation: bring your university question, compare what matters, and leave with a next move.</span>
               </figure>
 
-            <div className="hero-form-reveal">
+            <div className="hero-form-slot">
               <form className="hero-capture" onSubmit={startPlan}>
                 <fieldset>
                   <legend>What are you figuring out?</legend>
                   <div className="hero-topic-options">
-                    {topics.map((option) => <button key={option} type="button" aria-pressed={topic === option} data-active={topic === option} onClick={() => setTopic(option)}>{option}</button>)}
+                    {topics.map((option) => <button key={option} type="button" aria-pressed={topic === option} data-active={topic === option} onClick={() => selectTopic(option)}>{option}</button>)}
                   </div>
                 </fieldset>
                 <div className="hero-capture-row">
@@ -176,7 +185,7 @@ export default function HomePage() {
                 <li>No obligation</li>
                 <li>One practical next step</li>
               </ul>
-              <div className="contact-direct"><a href="https://wa.me/447710891277" target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" className="size-4" /> WhatsApp</a><a href="tel:+447710891277"><Phone aria-hidden="true" className="size-4" /> +44 7710 891277</a></div>
+              <div className="contact-direct"><a href={whatsappHref} target="_blank" rel="noreferrer"><MessageCircle aria-hidden="true" className="size-4" /> WhatsApp</a><a href="tel:+447710891277"><Phone aria-hidden="true" className="size-4" /> +44 7710 891277</a></div>
             </div>
 
             <div className="contact-form-wrap">

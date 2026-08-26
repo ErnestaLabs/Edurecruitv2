@@ -4,6 +4,7 @@
  * one lead proof and tightly grouped supporting proof rather than carousel theatre.
  */
 import Image from "next/image"
+import { ArrowRight } from "lucide-react"
 
 const stories = [
   {
@@ -60,6 +61,7 @@ export function TestimonialShowcase() {
               ))}
             </div>
           </div>
+          <div className="proof-handoff"><p>When you are ready, turn your own university question into an option to compare.</p><a href="#courses">Explore listed options <ArrowRight aria-hidden="true" className="size-4" /></a></div>
       </div>
     </section>
   )
