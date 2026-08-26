@@ -32,7 +32,11 @@ const preparation = [
   { title: "Agree your next move.", copy: "Leave with a clearer shortlist, a useful application priority, or the next question to answer." },
 ]
 
-const topics = ["Choosing a course or university", "Application or personal statement", "Returning to study"] as const
+const topics = [
+  { label: "Choosing a course or university", audience: "Starting university", outcome: "Build a sharper shortlist" },
+  { label: "Application or personal statement", audience: "Working on an application", outcome: "Set your application priorities" },
+  { label: "Returning to study", audience: "Returning or changing direction", outcome: "Plan the questions to check next" },
+] as const
 
 const faqs = [
   { question: "What happens in the 15-minute conversation?", answer: "You bring the question you are currently working through. We clarify the useful options, practical constraints, and next question or action to take." },
@@ -107,26 +111,32 @@ export default function HomePage() {
           <div className="shell hero-layout">
             <div className="hero-copy">
               <p className="hero-eyebrow">Personal university guidance</p>
-              <h1>A clear next move for your university decision.</h1>
-              <p>Bring your course, question, or situation. Leave knowing what to ask, compare, or do next.</p>
+              <h1>Turn your university question into a shortlist and practical next step.</h1>
+              <p>In 15 minutes, we help you filter the noise, compare the options that matter, and identify what to check next.</p>
             </div>
 
               <figure className="hero-evidence hero-evidence-slot">
                 <ConsultationHeroMotion imageSrc={assets.consultation} />
-                <figcaption>One focused conversation before a high-stakes choice.</figcaption>
+                <figcaption>A finite 15-minute plan for the question that needs an answer next.</figcaption>
                 <span className="sr-only">A short visual explanation: bring your university question, compare what matters, and leave with a next move.</span>
               </figure>
 
             <div className="hero-form-slot">
               <form className="hero-capture" onSubmit={startPlan}>
                 <fieldset>
-                  <legend>What are you figuring out?</legend>
+                  <legend>Where shall we start?</legend>
+                  <p className="hero-plan-intro">A focused conversation to work through the question in front of you.</p>
+                  <ul className="hero-plan-outcomes" aria-label="What the 15-minute plan covers">
+                    <li><span>01</span>Options worth comparing</li>
+                    <li><span>02</span>Application priorities</li>
+                    <li><span>03</span>A practical next step</li>
+                  </ul>
                   <div className="hero-topic-options">
-                    {topics.map((option) => <button key={option} type="button" aria-pressed={topic === option} data-active={topic === option} onClick={() => selectTopic(option)}>{option}</button>)}
+                    {topics.map((option) => <button key={option.label} type="button" aria-pressed={topic === option.label} data-active={topic === option.label} onClick={() => selectTopic(option.label)}><span>{option.audience}</span><strong>{option.label}</strong><small>{option.outcome}</small></button>)}
                   </div>
                 </fieldset>
                 <div className="hero-capture-row">
-                  <button type="submit">Start a 15-minute plan <ArrowRight aria-hidden="true" className="size-4" /></button>
+                  <button type="submit">Start my 15-minute plan <ArrowRight aria-hidden="true" className="size-4" /></button>
                 </div>
                 <p>Free and no obligation. We reply within 24 hours.</p>
               </form>
