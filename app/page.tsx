@@ -6,7 +6,7 @@
  * journey; Impeccable enforces one clear path, restrained hierarchy, and mobile-safe flow.
  */
 import { submitLead, type LeadFormState } from "@/app/actions/submit-lead"
-import { ScrollReveal } from "@/components/landing/scroll-reveal"
+import { ConsultationHeroMotion } from "@/components/landing/consultation-hero-motion"
 import { TestimonialShowcase } from "@/components/landing/testimonial-showcase"
 import { UniversityCourseAtlas } from "@/components/landing/university-course-atlas"
 import { ArrowRight, ArrowUpRight, Check, CheckCircle2, ChevronDown, Menu, MessageCircle, Phone, X } from "lucide-react"
@@ -27,9 +27,9 @@ const navItems = [
 ]
 
 const preparation = [
-  { title: "Bring the question you already have.", copy: "A course you are considering, a university you are unsure about, or the practical concern that is holding the decision up." },
-  { title: "See what is worth comparing.", copy: "We will help you separate useful options from noise and identify the questions that matter for your next step." },
-  { title: "Leave with something concrete to do.", copy: "A clearer shortlist, one application priority, or the practical next question to answer before you continue." },
+  { title: "Clarify your question.", copy: "Name the course, application, or practical concern that is making the decision feel stuck." },
+  { title: "Compare realistic options.", copy: "Separate the information worth checking from the noise, and identify what fits your situation." },
+  { title: "Agree your next move.", copy: "Leave with a clearer shortlist, a useful application priority, or the next question to answer." },
 ]
 
 const topics = ["Choosing a course or university", "Application or personal statement", "Returning to study"] as const
@@ -97,42 +97,42 @@ export default function HomePage() {
         <section className="relume-hero">
           <div className="shell hero-layout">
             <div className="hero-copy">
-              <ScrollReveal variant="hero-copy">
-              <h1>Start with the university question you already have.</h1>
-              <p>EduRecruitment is personal guidance for the course choice, application, or practical decision you do not want to get wrong alone.</p>
+              <p className="hero-eyebrow">Personal university guidance</p>
+              <h1>A clear next move for your university decision.</h1>
+              <p>Bring your course, question, or situation. Leave knowing what to ask, compare, or do next.</p>
+            </div>
+
+              <figure className="hero-evidence hero-evidence-reveal">
+                <ConsultationHeroMotion imageSrc={assets.consultation} />
+                <figcaption>One focused conversation before a high-stakes choice.</figcaption>
+                <span className="sr-only">A short visual explanation: bring your university question, compare what matters, and leave with a next move.</span>
+              </figure>
+
+            <div className="hero-form-reveal">
               <form className="hero-capture" onSubmit={startPlan}>
-                <label htmlFor="hero-topic">What would help most?</label>
+                <fieldset>
+                  <legend>What are you figuring out?</legend>
+                  <div className="hero-topic-options">
+                    {topics.map((option) => <button key={option} type="button" aria-pressed={topic === option} data-active={topic === option} onClick={() => setTopic(option)}>{option}</button>)}
+                  </div>
+                </fieldset>
                 <div className="hero-capture-row">
-                  <select id="hero-topic" value={topic} onChange={(event) => setTopic(event.target.value)}>
-                    <option value="">Choose your starting point</option>
-                    {topics.map((option) => <option key={option} value={option}>{option}</option>)}
-                  </select>
-                  <button type="submit">Start my free plan <ArrowRight aria-hidden="true" className="size-4" /></button>
+                  <button type="submit">Start a 15-minute plan <ArrowRight aria-hidden="true" className="size-4" /></button>
                 </div>
                 <p>Free and no obligation. We reply within 24 hours.</p>
               </form>
-              </ScrollReveal>
             </div>
-
-            <ScrollReveal variant="hero-image" className="hero-evidence-reveal" delay={100}>
-              <figure className="hero-evidence">
-                <Image src={assets.consultation} alt="Two people having a focused university planning conversation over notes and coffee." fill priority unoptimized sizes="(min-width: 1024px) 51vw, 100vw" className="object-cover" />
-                <figcaption>A human conversation before a high-stakes choice.</figcaption>
-              </figure>
-            </ScrollReveal>
           </div>
         </section>
 
         <section id="how-it-helps" aria-labelledby="preparation-title" className="section-pad bg-navy text-cream">
           <div className="shell">
-            <ScrollReveal variant="statement">
               <div className="preparation-heading">
-                <h2 id="preparation-title" className="display max-w-[15ch]">You do not need to have it all worked out before you speak.</h2>
+                <h2 id="preparation-title" className="display max-w-[15ch]">What the first conversation makes clear.</h2>
               </div>
               <div className="preparation-list mt-12">
                 {preparation.map((item) => <article key={item.title}><h3>{item.title}</h3><p>{item.copy}</p></article>)}
               </div>
-            </ScrollReveal>
           </div>
         </section>
 
@@ -142,7 +142,7 @@ export default function HomePage() {
         <section className="section-pad bg-cream">
           <div className="shell support-layout">
             <div>
-              <h2 className="display max-w-[14ch]">Personal help with the questions behind the application.</h2>
+              <h2 className="display max-w-[14ch]">Support for the practical questions behind the application.</h2>
             </div>
             <div className="support-lines">
               <p><Check aria-hidden="true" className="size-5 text-gold" />Course and university options that fit your situation.</p>
@@ -155,7 +155,7 @@ export default function HomePage() {
         <section id="questions" aria-labelledby="questions-title" className="section-pad bg-warm-grey">
           <div className="shell faq-layout">
             <div>
-              <h2 id="questions-title" className="display max-w-[13ch]">The practical questions deserve clear answers.</h2>
+              <h2 id="questions-title" className="display max-w-[13ch]">Questions people bring first.</h2>
             </div>
             <div className="faq-list">
               {faqs.map((faq, index) => {
@@ -169,7 +169,7 @@ export default function HomePage() {
         <section id="contact" aria-labelledby="contact-title" className="section-pad bg-navy text-cream">
           <div className="shell contact-layout">
             <div className="contact-copy">
-              <h2 id="contact-title" className="display max-w-[12ch]">Send the question you want to make clearer.</h2>
+              <h2 id="contact-title" className="display max-w-[12ch]">Send the question that is holding the decision up.</h2>
               <p>Tell us where you are stuck. The conversation is free, and we reply within 24 hours to arrange it and explain what happens next.</p>
               <ul>
                 <li>Free to students</li>

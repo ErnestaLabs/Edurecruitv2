@@ -6,7 +6,6 @@
  * reading flow by keeping selection, facts, and action in normal document order.
  */
 import { universities } from "@/data/universities"
-import { ScrollReveal } from "@/components/landing/scroll-reveal"
 import { ArrowRight, CalendarDays, Clock3, MapPin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -24,7 +23,6 @@ export function UniversityCourseAtlas({ onQuestionSelected }: UniversityCourseAt
   return (
     <section id="courses" aria-labelledby="partners-title" className="section-pad bg-navy text-cream">
       <div className="shell">
-        <ScrollReveal variant="section">
           <div className="partner-heading">
             <div>
               <h2 id="partners-title" className="display max-w-[15ch]">Choose an option to ask a better question.</h2>
@@ -36,7 +34,7 @@ export function UniversityCourseAtlas({ onQuestionSelected }: UniversityCourseAt
           {universities.map((university) => {
             const selected = university.slug === activeUniversity.slug
             return (
-              <button key={university.slug} type="button" aria-pressed={selected} className={`partner-brand ${selected ? "partner-brand-active" : ""}`} onClick={() => setActiveSlug(university.slug)}>
+              <button key={university.slug} type="button" aria-label={`View course details for ${university.name}`} aria-pressed={selected} className={`partner-brand ${selected ? "partner-brand-active" : ""}`} onClick={() => setActiveSlug(university.slug)}>
                 <Image src={university.logo} alt={`${university.name} logo`} width={320} height={132} unoptimized className="h-14 w-auto max-w-full object-contain md:h-16" />
               </button>
             )
@@ -65,7 +63,6 @@ export function UniversityCourseAtlas({ onQuestionSelected }: UniversityCourseAt
             <p className="mt-5 text-sm leading-6 text-cream/65">Course and intake availability can change. We will help you identify the questions to check before you decide.</p>
           </div>
           </article>
-        </ScrollReveal>
       </div>
     </section>
   )

@@ -14,6 +14,7 @@
   "dependencies": {
     "@base-ui/react": "^1.6.0",
     "@next/swc-win32-x64-msvc": "^16.3.1",
+    "@remotion/player": "^4.0.516",
     "@tabler/icons-react": "^3.45.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
@@ -27,6 +28,7 @@
     "react": "19.2.4",
     "react-dom": "19.2.4",
     "react-icons": "^5.7.0",
+    "remotion": "^4.0.516",
     "resend": "^6.18.0",
     "shadcn": "^4.14.1",
     "tailwind-merge": "^3.6.0",

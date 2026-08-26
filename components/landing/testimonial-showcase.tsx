@@ -4,7 +4,6 @@
  * one lead proof and tightly grouped supporting proof rather than carousel theatre.
  */
 import Image from "next/image"
-import { ScrollReveal } from "@/components/landing/scroll-reveal"
 
 const stories = [
   {
@@ -33,7 +32,6 @@ export function TestimonialShowcase() {
   return (
     <section id="stories" aria-labelledby="stories-title" className="section-pad bg-warm-grey">
       <div className="shell">
-        <ScrollReveal variant="section">
           <div className="proof-heading">
             <h2 id="stories-title" className="display max-w-[14ch]">Support should make the next step feel less lonely.</h2>
             <p className="section-intro">These are the experiences students shared after working through their university questions with EduRecruitment.</p>
@@ -62,7 +60,6 @@ export function TestimonialShowcase() {
               ))}
             </div>
           </div>
-        </ScrollReveal>
       </div>
     </section>
   )
