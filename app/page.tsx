@@ -116,8 +116,8 @@ export default function HomePage() {
             </div>
 
               <figure className="hero-evidence hero-evidence-slot">
-                <ConsultationHeroMotion imageSrc={assets.consultation} />
-                <figcaption className="sr-only">A short cinematic consultation story: bring your university question, find the useful signal, and leave with a clearer next move.</figcaption>
+                <ConsultationHeroMotion />
+                <figcaption className="sr-only">A code-driven university wayfinding film: a question becomes three routes and a clearer next move.</figcaption>
               </figure>
 
             <div className="hero-form-slot">

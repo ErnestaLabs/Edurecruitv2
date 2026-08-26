@@ -49,12 +49,12 @@
   .mobile-nav { display: grid; border-top: 1px solid rgba(16, 38, 59, 0.1); padding: 0.75rem 1.25rem 1rem; background: #fcfbf7; }
   .mobile-nav a { display: flex; align-items: center; justify-content: space-between; padding: 0.85rem 0; color: #10263b; font-weight: 700; }
   .relume-hero { background: #fcfbf7; padding-inline: 1.25rem; }
-  .hero-layout { display: grid; min-height: calc(100svh - 5rem); grid-template-areas: "copy" "form" "media"; grid-template-columns: 1fr; overflow: hidden; }
+  .hero-layout { display: grid; min-height: calc(100svh - 5rem); grid-template-areas: "copy" "media" "form"; grid-template-columns: 1fr; overflow: hidden; }
   .hero-copy { grid-area: copy; display: flex; flex-direction: column; justify-content: center; padding: clamp(3.5rem, 8vw, 6rem) 0 1.5rem; }
   .hero-copy h1 { max-width: 13ch; font-size: clamp(3.15rem, 6.2vw, 7.1rem); line-height: 0.88; letter-spacing: -0.055em; color: #10263b; }
   .hero-eyebrow { margin-bottom: 1rem; color: #c9a84c !important; font-size: 0.72rem !important; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; }
   .hero-copy > p:not(.hero-eyebrow) { max-width: 36rem; margin-top: 1.75rem; color: #4d585f; font-size: clamp(1.08rem, 1.5vw, 1.32rem); line-height: 1.65; }
-  .hero-form-slot { grid-area: form; padding: 0 0 clamp(3.5rem, 7vw, 6rem); }
+  .hero-form-slot { grid-area: form; padding: 1.25rem 0 clamp(3.5rem, 7vw, 6rem); }
   .hero-capture { max-width: 42rem; background: #10263b; padding: clamp(1.15rem, 2.5vw, 1.6rem); }
   .hero-capture legend { color: #fcfbf7; font-family: var(--font-heading); font-size: clamp(1.75rem, 2.4vw, 2.35rem); line-height: 1; }
   .hero-plan-intro { max-width: 36rem; margin-top: 0.6rem; color: rgba(252, 251, 247, 0.7); font-size: 0.78rem; line-height: 1.5; }
@@ -75,8 +75,8 @@
   .hero-capture > .hero-capture-row > button:hover, .contact-form button:hover { transform: translateY(-2px); background: #d9b85f; }
   .hero-capture > .hero-capture-row > button:active, .contact-form button:active { transform: scale(0.98); }
   .hero-capture > p { margin-top: 0.7rem; color: rgba(252, 251, 247, 0.7); font-size: 0.78rem; line-height: 1.45; }
-  .hero-evidence { position: relative; min-height: 28rem; overflow: hidden; background: #10263b; }
-  .hero-evidence-slot { grid-area: media; min-height: 28rem; }
+  .hero-evidence { position: relative; min-height: 22rem; overflow: hidden; background: #071d30; }
+  .hero-evidence-slot { grid-area: media; min-height: 22rem; }
   .hero-evidence-slot.hero-evidence { height: 100%; }
   .hero-motion-player, .hero-motion-static { position: absolute; inset: 0; width: 100%; height: 100%; }
   .hero-motion-static { display: flex; flex-direction: column; justify-content: space-between; background-position: center; background-size: cover; padding: clamp(1.25rem, 4vw, 2.5rem); color: #fcfbf7; }
