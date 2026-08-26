@@ -81,6 +81,17 @@ export default function HomePage() {
     setFormTopic(nextTopic)
   }
 
+  const handleTopicKeyDown = (event: React.KeyboardEvent<HTMLButtonElement>, index: number) => {
+    const forward = event.key === "ArrowRight" || event.key === "ArrowDown"
+    const backward = event.key === "ArrowLeft" || event.key === "ArrowUp"
+    if (!forward && !backward) return
+    event.preventDefault()
+    const nextIndex = forward ? (index + 1) % topics.length : (index - 1 + topics.length) % topics.length
+    selectTopic(topics[nextIndex].label)
+    const buttons = event.currentTarget.parentElement?.querySelectorAll<HTMLButtonElement>("button")
+    buttons?.[nextIndex]?.focus()
+  }
+
   const handleSubmit = (formData: FormData) => {
     startTransition(async () => setLeadState(await submitLead(emptyLeadState, formData)))
   }
@@ -111,7 +122,11 @@ export default function HomePage() {
           <div className="shell hero-layout">
             <div className="hero-copy">
               <p className="hero-eyebrow">Independent university guidance</p>
-              <h1>Turn your university question into a shortlist and practical next step.</h1>
+              <h1 aria-label="Turn your university question into a shortlist and practical next step.">
+                <span className="hero-title-line"><span>Turn your university question</span></span>
+                <span className="hero-title-line"><span>into a shortlist and</span></span>
+                <span className="hero-title-line"><span>practical next step.</span></span>
+              </h1>
               <p>In 15 minutes, we help you filter the noise, compare realistic options, and identify the exact move you need to make next.</p>
             </div>
 
@@ -126,12 +141,12 @@ export default function HomePage() {
                   <legend>Where do you need the most clarity?</legend>
                   <p className="hero-plan-intro">A focused conversation to resolve the question holding you back.</p>
                   <ul className="hero-plan-outcomes" aria-label="What the 15-minute plan covers">
-                    <li><span>01</span>Realistic course options</li>
-                    <li><span>02</span>Clear application priorities</li>
-                    <li><span>03</span>A defined next step</li>
+                    <li><span className="editorial-number">01</span><span className="editorial-text">Realistic course options</span></li>
+                    <li><span className="editorial-number">02</span><span className="editorial-text">Clear application priorities</span></li>
+                    <li><span className="editorial-number">03</span><span className="editorial-text">A defined next step</span></li>
                   </ul>
                   <div className="hero-topic-options" role="radiogroup" aria-label="Choose your starting topic">
-                    {topics.map((option) => <button key={option.label} type="button" role="radio" aria-checked={topic === option.label} data-active={topic === option.label} onClick={() => selectTopic(option.label)}><span>{option.audience}</span><strong>{option.label}</strong><small>{option.outcome}</small></button>)}
+                    {topics.map((option, index) => <button key={option.label} type="button" role="radio" tabIndex={topic === option.label || (!topic && index === 0) ? 0 : -1} aria-checked={topic === option.label} data-active={topic === option.label} onClick={() => selectTopic(option.label)} onKeyDown={(event) => handleTopicKeyDown(event, index)}><span>{option.audience}</span><strong>{option.label}</strong><small>{option.outcome}</small></button>)}
                   </div>
                 </fieldset>
                 <div className="hero-capture-row">

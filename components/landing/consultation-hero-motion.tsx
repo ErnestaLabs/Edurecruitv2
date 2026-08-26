@@ -16,9 +16,10 @@ const display = "Instrument Serif, Georgia, serif"
 const dots = Array.from({ length: 44 }, (_, index) => ({ x: (index * 71) % 100, y: (index * 43 + 13) % 100, size: 1 + (index % 3) * 0.65, delay: index * 3 }))
 
 function Field({ frame }: { frame: number }) {
+  const gridReveal = interpolate(frame, [0, 28], [0.25, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })
   return <AbsoluteFill style={{ overflow: "hidden", background: navy }}>
-    <div style={{ position: "absolute", inset: 0, opacity: 0.18, backgroundImage: "linear-gradient(rgba(252,251,247,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(252,251,247,0.16) 1px, transparent 1px)", backgroundSize: "11% 11%", transform: `translate(${Math.sin(frame / 80) * 1.6}%, ${Math.cos(frame / 90) * 1.2}%)` }} />
-    {dots.map((dot) => <i key={`${dot.x}-${dot.y}`} style={{ position: "absolute", top: `${dot.y}%`, left: `${dot.x}%`, width: dot.size, height: dot.size, borderRadius: "50%", background: gold, opacity: 0.22 + Math.sin((frame - dot.delay) / 14) * 0.16 }} />)}
+    <div style={{ position: "absolute", inset: 0, opacity: 0.18 * gridReveal, backgroundImage: "linear-gradient(rgba(252,251,247,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(252,251,247,0.16) 1px, transparent 1px)", backgroundSize: "11% 11%", transform: `scale(${1.05 - gridReveal * 0.05}) translate(${Math.sin(frame / 80) * 1.6}%, ${Math.cos(frame / 90) * 1.2}%)` }} />
+    {dots.map((dot) => <i key={`${dot.x}-${dot.y}`} style={{ position: "absolute", top: `${dot.y}%`, left: `${dot.x}%`, width: dot.size, height: dot.size, borderRadius: "50%", background: gold, opacity: (0.22 + Math.sin((frame - dot.delay) / 14) * 0.16) * gridReveal }} />)}
     <div style={{ position: "absolute", top: "-38%", right: "-18%", width: "75%", aspectRatio: "1", borderRadius: "50%", border: "1px solid rgba(201,168,76,0.32)", boxShadow: "0 0 0 5rem rgba(201,168,76,0.025), 0 0 0 10rem rgba(201,168,76,0.018)" }} />
   </AbsoluteFill>
 }
@@ -42,7 +43,7 @@ function CodeDrivenFilm({ compact }: { compact: boolean }) {
 
     <div style={{ position: "absolute", top: "7%", left: "8%", right: "8%", display: "flex", alignItems: "center", justifyContent: "space-between", borderTop: "1px solid rgba(252,251,247,0.35)", paddingTop: "0.7rem", fontFamily: editorial, fontSize: "0.62rem", fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase", opacity: Math.max(intro, routes, arrival) }}><span>University wayfinding</span><span>15 minutes</span></div>
 
-    <div style={{ position: "absolute", top: compact ? "17%" : "15%", left: "10%", right: "10%", opacity: intro, transform: `translateY(${(1 - questionIn) * 30}px)` }}>
+    <div style={{ position: "absolute", top: compact ? "17%" : "15%", left: "10%", right: "10%", opacity: intro, clipPath: `inset(0 0 ${(1 - questionIn) * 100}% 0)`, transform: `translateY(${(1 - questionIn) * 30}px)` }}>
       <span style={{ color: gold, fontFamily: editorial, fontSize: "0.66rem", fontWeight: 800, letterSpacing: "0.15em", textTransform: "uppercase" }}>The question in front of you</span>
       <div style={{ position: "relative", width: "fit-content", marginTop: compact ? "0.15rem" : "-0.6rem", transform: `scale(${questionScale}) rotate(${questionTilt}deg)`, transformOrigin: "left center" }}><strong style={{ fontFamily: display, fontSize: "clamp(12rem, 35vw, 26rem)", fontWeight: 400, lineHeight: 0.7, letterSpacing: "-0.1em" }}>?</strong><i style={{ position: "absolute", right: "-16%", bottom: "18%", width: "1.1rem", height: "1.1rem", borderRadius: "50%", background: gold, boxShadow: `0 0 ${18 + waypointPulse * 28}px rgba(201,168,76,${waypointPulse})` }} /></div>
       <p style={{ maxWidth: "15rem", margin: compact ? "1.4rem 0 0" : "2rem 0 0", color: "rgba(252,251,247,0.72)", fontFamily: editorial, fontSize: "0.8rem", lineHeight: 1.55 }}>Every application is easier to navigate when you have a clear route.</p>
@@ -56,12 +57,12 @@ function CodeDrivenFilm({ compact }: { compact: boolean }) {
         <circle cx="118" cy="150" r="9" fill={gold} opacity={routeDraw} />
         <circle cx="626" cy="1110" r="9" fill={gold} opacity={routeDraw} />
       </svg>
-      <div style={{ position: "absolute", top: "26%", right: "3%", borderLeft: `2px solid ${gold}`, paddingLeft: "0.7rem", fontFamily: editorial, fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", transform: `translateX(${(1 - routeDraw) * 28}px)` }}>Courses</div>
-      <div style={{ position: "absolute", top: "51%", left: "2%", borderLeft: `2px solid ${cream}`, paddingLeft: "0.7rem", color: "rgba(252,251,247,0.82)", fontFamily: editorial, fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", transform: `translateX(${(1 - routeDraw) * -28}px)` }}>Applications</div>
-      <div style={{ position: "absolute", bottom: "15%", right: "5%", borderLeft: `2px solid ${gold}`, paddingLeft: "0.7rem", fontFamily: editorial, fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", transform: `translateX(${(1 - routeDraw) * 28}px)` }}>Practicalities</div>
+      <div style={{ position: "absolute", top: "26%", right: "3%", borderLeft: `2px solid ${gold}`, paddingLeft: "0.7rem", fontFamily: editorial, fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", clipPath: `inset(0 ${(1 - routeDraw) * 100}% 0 0)`, transform: `translateX(${(1 - routeDraw) * 28}px)` }}>Courses</div>
+      <div style={{ position: "absolute", top: "51%", left: "2%", borderLeft: `2px solid ${cream}`, paddingLeft: "0.7rem", color: "rgba(252,251,247,0.82)", fontFamily: editorial, fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", clipPath: `inset(0 0 0 ${(1 - routeDraw) * 100}%)`, transform: `translateX(${(1 - routeDraw) * -28}px)` }}>Applications</div>
+      <div style={{ position: "absolute", bottom: "15%", right: "5%", borderLeft: `2px solid ${gold}`, paddingLeft: "0.7rem", fontFamily: editorial, fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase", clipPath: `inset(0 ${(1 - routeDraw) * 100}% 0 0)`, transform: `translateX(${(1 - routeDraw) * 28}px)` }}>Practicalities</div>
     </div>
 
-    <div style={{ position: "absolute", inset: 0, display: "grid", alignContent: "center", justifyItems: "center", padding: "0 8%", opacity: arrival, transform: `translateY(${(1 - nextIn) * 30}px)` }}>
+    <div style={{ position: "absolute", inset: 0, display: "grid", alignContent: "center", justifyItems: "center", padding: "0 8%", opacity: arrival, clipPath: `inset(${(1 - nextIn) * 45}% 0 ${(1 - nextIn) * 45}% 0)`, transform: `translateY(${(1 - nextIn) * 30}px)` }}>
       <span style={{ color: gold, fontFamily: editorial, fontSize: "0.67rem", fontWeight: 800, letterSpacing: "0.16em", textTransform: "uppercase" }}>Your practical next step</span>
       <strong style={{ marginTop: compact ? "0.5rem" : "-0.25rem", fontFamily: display, fontSize: wordSize, fontWeight: 400, lineHeight: 0.68, letterSpacing: "-0.1em" }}>CLEAR</strong>
       <p style={{ maxWidth: "19rem", margin: compact ? "1.4rem 0 0" : "2.1rem 0 0", textAlign: "center", color: "rgba(252,251,247,0.77)", fontFamily: editorial, fontSize: "0.82rem", lineHeight: 1.55 }}>A defined path for the decision you are making.</p>
