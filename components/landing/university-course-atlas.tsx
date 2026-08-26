@@ -37,7 +37,7 @@ export function UniversityCourseAtlas({ onQuestionSelected }: UniversityCourseAt
             const selected = university.slug === activeUniversity.slug
             return (
               <button key={university.slug} type="button" aria-pressed={selected} className={`partner-brand ${selected ? "partner-brand-active" : ""}`} onClick={() => setActiveSlug(university.slug)}>
-                <Image src={university.logo} alt={`${university.name} logo`} width={240} height={100} unoptimized className="h-11 w-auto max-w-[9.5rem] object-contain object-left md:h-12" />
+                <Image src={university.logo} alt={`${university.name} logo`} width={320} height={132} unoptimized className="h-14 w-auto max-w-[12rem] object-contain object-left md:h-16 md:max-w-[14rem]" />
               </button>
             )
           })}

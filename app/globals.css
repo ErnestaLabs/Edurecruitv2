@@ -89,8 +89,9 @@
   .partner-heading { display: grid; gap: 1.5rem; }
   .partner-heading .display { color: #fcfbf7; }
   .partner-heading > p { max-width: 36rem; color: rgba(252, 251, 247, 0.7); font-size: 1.05rem; line-height: 1.7; }
-  .partner-brand-row { display: flex; gap: 2rem; overflow-x: auto; border-bottom: 1px solid rgba(252, 251, 247, 0.23); padding-bottom: 1rem; scrollbar-color: #c9a84c #10263b; }
-  .partner-brand { position: relative; flex: 0 0 auto; min-width: 9rem; padding: 0.25rem 0 1rem; opacity: 0.58; transition: opacity 160ms ease-out; }
+  .partner-brand-row { display: flex; gap: clamp(2rem, 4vw, 3.5rem); overflow-x: auto; border-bottom: 1px solid rgba(252, 251, 247, 0.23); padding: 0.4rem 0 1.2rem; scrollbar-color: #c9a84c #10263b; }
+  .partner-brand { position: relative; flex: 0 0 auto; min-width: 12rem; padding: 0.45rem 0 1.15rem; opacity: 0.82; transition: opacity 160ms ease-out; }
+  .partner-brand img { display: block; }
   .partner-brand::after { position: absolute; right: 0; bottom: 0; left: 0; height: 2px; content: ""; transform: scaleX(0); background: #c9a84c; transition: transform 160ms ease-out; }
   .partner-brand:hover, .partner-brand-active { opacity: 1; }
   .partner-brand-active::after { transform: scaleX(1); }
