@@ -1,3 +1,8 @@
+/**
+ * Design context: The Remotion panel is the hero’s dominant University Decision Map.
+ * The consultation photograph is deliberately reduced to faint texture so the visible
+ * planning route, selected pathway, and practical outputs carry the conversion story.
+ */
 "use client"
 
 import { Player } from "@remotion/player"
@@ -7,45 +12,48 @@ import { useEffect, useState } from "react"
 type HeroMotionProps = { imageSrc: string; pathway: string }
 
 const planningOutputs = [
-  { number: "01", title: "Options to compare", detail: "A focused shortlist" },
-  { number: "02", title: "Application priority", detail: "The useful thing to check" },
-  { number: "03", title: "Your next step", detail: "One move to take forward" },
+  { number: "01", title: "Compare options", detail: "Build a useful shortlist", tag: "SCOPE" },
+  { number: "02", title: "Set priorities", detail: "Find what needs attention", tag: "FOCUS" },
+  { number: "03", title: "Choose a next step", detail: "Leave with a direction", tag: "MOVE" },
 ]
 
-function ConsultationMapMotion({ pathway }: Pick<HeroMotionProps, "pathway">) {
+function DecisionMapMotion({ pathway }: Pick<HeroMotionProps, "pathway">) {
   const frame = useCurrentFrame()
   const { fps } = useVideoConfig()
-  const questionEnter = spring({ frame, fps, durationInFrames: 24, config: { damping: 200, stiffness: 130, overshootClamping: true } })
-  const questionExit = interpolate(frame, [18, 38], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })
-  const mapEnter = spring({ frame: frame - 14, fps, durationInFrames: 22, config: { damping: 200, stiffness: 130, overshootClamping: true } })
-  const finishEnter = spring({ frame: frame - 68, fps, durationInFrames: 20, config: { damping: 200, stiffness: 140, overshootClamping: true } })
+  const headingIn = spring({ frame, fps, durationInFrames: 24, config: { damping: 200, stiffness: 130, overshootClamping: true } })
+  const routeDraw = interpolate(frame, [8, 76], [0.18, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })
+  const activePulse = 0.65 + Math.sin(frame / 12) * 0.35
 
   return (
-    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden", background: "transparent", color: "#fcfbf7" }}>
-      <div style={{ position: "absolute", inset: 0, background: "linear-gradient(130deg, rgba(16,38,59,0.9), rgba(16,38,59,0.28) 58%, rgba(16,38,59,0.74))" }} />
-      <div style={{ position: "relative", zIndex: 1, height: "100%", padding: "clamp(1.25rem, 4vw, 2.5rem)" }}>
-        <span style={{ position: "absolute", top: "10%", left: "clamp(1.25rem, 4vw, 2.5rem)", borderLeft: "2px solid #c9a84c", paddingLeft: "0.65rem", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.72rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" }}>15-minute consultation map</span>
+    <div style={{ position: "relative", width: "100%", height: "100%", overflow: "hidden", background: "#0b2237", color: "#fcfbf7" }}>
+      <div style={{ position: "absolute", inset: 0, opacity: 0.11, backgroundImage: "radial-gradient(rgba(201,168,76,0.86) 0.75px, transparent 0.75px)", backgroundSize: "13px 13px", mixBlendMode: "screen" }} />
+      <div style={{ position: "absolute", top: "-20%", right: "-16%", width: "72%", height: "72%", borderRadius: "50%", border: "1px solid rgba(201,168,76,0.24)", boxShadow: "0 0 0 5rem rgba(201,168,76,0.025), 0 0 0 10rem rgba(201,168,76,0.02)" }} />
+      <div style={{ position: "absolute", right: "8%", bottom: "8%", width: "28%", height: "20%", border: "1px solid rgba(252,251,247,0.17)", transform: "rotate(-12deg)" }} />
 
-        <div style={{ position: "absolute", top: "30%", left: "10%", right: "10%", border: "1px solid rgba(252,251,247,0.52)", background: "rgba(16,38,59,0.72)", padding: "clamp(1rem, 2vw, 1.5rem)", opacity: questionExit * questionEnter, transform: `translateY(${(1 - questionEnter) * 24 - (1 - questionExit) * 44}px) scale(${0.96 + questionEnter * 0.04})` }}>
-          <span style={{ color: "#c9a84c", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.65rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" }}>Your starting point</span>
-          <strong style={{ display: "block", marginTop: "0.55rem", fontFamily: "Instrument Serif, Georgia, serif", fontSize: "clamp(1.9rem, 3.7vw, 3.4rem)", fontWeight: 400, lineHeight: 0.92, letterSpacing: "-0.035em" }}>{pathway}</strong>
-          <span style={{ display: "block", marginTop: "0.8rem", color: "rgba(252,251,247,0.72)", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.76rem", lineHeight: 1.45 }}>Bring the question as it is. We make it useful.</span>
+      <div style={{ position: "relative", zIndex: 1, height: "100%", padding: "clamp(1.25rem, 4vw, 2.7rem)" }}>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "1rem", borderBottom: "1px solid rgba(252,251,247,0.2)", paddingBottom: "0.85rem" }}>
+          <span style={{ borderLeft: "2px solid #c9a84c", paddingLeft: "0.65rem", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.68rem", fontWeight: 800, letterSpacing: "0.14em", textTransform: "uppercase" }}>University decision map</span>
+          <span style={{ color: "#c9a84c", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.62rem", fontWeight: 800, letterSpacing: "0.13em" }}>15 MINUTES</span>
         </div>
 
-        <div style={{ position: "absolute", top: "24%", left: "10%", right: "10%", opacity: mapEnter }}>
-          {planningOutputs.map((output, index) => {
-            const step = spring({ frame: frame - 18 - index * 12, fps, durationInFrames: 20, config: { damping: 200, stiffness: 145, overshootClamping: true } })
-            return <div key={output.number} style={{ display: "grid", gridTemplateColumns: "2rem 1fr auto", alignItems: "center", gap: "0.7rem", marginTop: index === 0 ? 0 : "0.65rem", borderLeft: "2px solid #c9a84c", background: "rgba(16,38,59,0.92)", padding: "0.75rem 0.85rem", opacity: step, transform: `translateX(${(1 - step) * 54}px)` }}>
-              <span style={{ color: "#c9a84c", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.66rem", fontWeight: 800, letterSpacing: "0.1em" }}>{output.number}</span>
-              <strong style={{ fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.78rem", lineHeight: 1.25 }}>{output.title}</strong>
-              <span style={{ color: "rgba(252,251,247,0.62)", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.64rem", lineHeight: 1.2, textAlign: "right" }}>{output.detail}</span>
-            </div>
-          })}
+        <div style={{ position: "absolute", top: "18%", left: "clamp(1.25rem, 4vw, 2.7rem)", right: "clamp(1.25rem, 4vw, 2.7rem)", opacity: headingIn, transform: `translateY(${(1 - headingIn) * 26}px)` }}>
+          <span style={{ color: "rgba(252,251,247,0.57)", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.62rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" }}>Your starting point</span>
+          <strong style={{ display: "block", maxWidth: "13ch", marginTop: "0.5rem", color: "#fcfbf7", fontFamily: "Instrument Serif, Georgia, serif", fontSize: "clamp(2.5rem, 5vw, 5.4rem)", fontWeight: 400, lineHeight: 0.82, letterSpacing: "-0.05em" }}>{pathway}</strong>
         </div>
 
-        <div style={{ position: "absolute", right: "10%", bottom: "10%", maxWidth: "78%", borderTop: "1px solid rgba(201,168,76,0.8)", background: "rgba(16,38,59,0.9)", padding: "0.8rem 0 0", opacity: finishEnter, transform: `translateY(${(1 - finishEnter) * 18}px)` }}>
-          <span style={{ color: "#c9a84c", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.62rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" }}>Map ready</span>
-          <strong style={{ display: "block", marginTop: "0.35rem", fontFamily: "Instrument Serif, Georgia, serif", fontSize: "clamp(1.5rem, 2.8vw, 2.45rem)", fontWeight: 400, lineHeight: 0.95, letterSpacing: "-0.03em" }}>A question with a direction.</strong>
+        <div style={{ position: "absolute", top: "42%", bottom: "11%", left: "clamp(1.25rem, 4vw, 2.7rem)", right: "clamp(1.25rem, 4vw, 2.7rem)" }}>
+          <div style={{ position: "absolute", top: "7%", bottom: "7%", left: "1.55rem", width: "2px", transformOrigin: "top", transform: `scaleY(${routeDraw})`, background: "linear-gradient(#c9a84c, rgba(201,168,76,0.32))" }} />
+          <div style={{ position: "absolute", top: `${7 + routeDraw * 72}%`, left: "1.15rem", width: "0.86rem", height: "0.86rem", borderRadius: "50%", background: "#c9a84c", boxShadow: `0 0 ${14 + activePulse * 18}px rgba(201,168,76,${activePulse})` }} />
+          <div style={{ display: "grid", height: "100%", alignContent: "space-between", gap: "0.85rem" }}>
+            {planningOutputs.map((output, index) => {
+              const step = spring({ frame: frame - 10 - index * 13, fps, durationInFrames: 22, config: { damping: 200, stiffness: 145, overshootClamping: true } })
+              return <article key={output.number} style={{ position: "relative", display: "grid", gridTemplateColumns: "3.1rem minmax(0, 1fr) auto", alignItems: "center", gap: "0.75rem", minHeight: "29%", border: "1px solid rgba(252,251,247,0.32)", borderLeft: "3px solid #c9a84c", background: "rgba(6,25,42,0.88)", padding: "0.85rem 1rem", opacity: 0.42 + step * 0.58, transform: `translateX(${(1 - step) * 38}px)` }}>
+                <span style={{ color: "#c9a84c", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.8rem", fontWeight: 800, letterSpacing: "0.1em" }}>{output.number}</span>
+                <div><strong style={{ display: "block", fontFamily: "Instrument Serif, Georgia, serif", fontSize: "clamp(1.55rem, 2.65vw, 2.9rem)", fontWeight: 400, lineHeight: 0.88, letterSpacing: "-0.03em" }}>{output.title}</strong><span style={{ display: "block", marginTop: "0.35rem", color: "rgba(252,251,247,0.67)", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.68rem", lineHeight: 1.35 }}>{output.detail}</span></div>
+                <span style={{ alignSelf: "start", color: "rgba(252,251,247,0.55)", fontFamily: "Plus Jakarta Sans, sans-serif", fontSize: "0.58rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" }}>{output.tag}</span>
+              </article>
+            })}
+          </div>
         </div>
       </div>
     </div>
@@ -64,16 +72,18 @@ function useReducedMotion() {
   return reduced
 }
 
+function StaticDecisionMap({ pathway, imageSrc }: HeroMotionProps) {
+  return <div className="hero-motion-static" style={{ backgroundImage: `linear-gradient(rgba(11,34,55,0.94), rgba(11,34,55,0.94)), url(${imageSrc})`, backgroundBlendMode: "normal" }}>
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", borderBottom: "1px solid rgba(252,251,247,0.2)", paddingBottom: "0.85rem" }}><span>University decision map</span><b style={{ color: "#c9a84c", fontSize: "0.64rem", letterSpacing: "0.12em" }}>15 MINUTES</b></div>
+    <div style={{ display: "grid", height: "100%", alignContent: "space-around", gap: "1rem", paddingTop: "1.25rem" }}><div><span style={{ color: "rgba(252,251,247,0.57)", fontSize: "0.62rem", fontWeight: 800, letterSpacing: "0.12em", textTransform: "uppercase" }}>Your starting point</span><strong style={{ display: "block", marginTop: "0.45rem", fontFamily: "Instrument Serif, Georgia, serif", fontSize: "clamp(2.25rem, 6vw, 4rem)", fontWeight: 400, lineHeight: 0.88 }}>{pathway}</strong></div><ol style={{ display: "grid", gap: "0.55rem" }}>{planningOutputs.map((output) => <li key={output.number} style={{ display: "grid", gridTemplateColumns: "2rem 1fr", gap: "0.6rem", borderLeft: "2px solid #c9a84c", background: "rgba(6,25,42,0.88)", padding: "0.7rem 0.85rem" }}><b style={{ color: "#c9a84c", fontSize: "0.7rem" }}>{output.number}</b><span><strong style={{ display: "block", fontSize: "1.05rem" }}>{output.title}</strong><small style={{ color: "rgba(252,251,247,0.65)" }}>{output.detail}</small></span></li>)}</ol></div>
+  </div>
+}
+
 export function ConsultationHeroMotion({ imageSrc, pathway }: HeroMotionProps) {
   const reduced = useReducedMotion()
-  const activePathway = imageSrc && pathway ? pathway : "Your university question"
+  const activePathway = pathway || "Your university question"
 
-  if (reduced) {
-    return <div className="hero-motion-static" style={{ backgroundImage: `linear-gradient(180deg, rgba(16,38,59,0.2), rgba(16,38,59,0.9)), url(${imageSrc})` }}>
-      <span>15-minute consultation map</span>
-      <div style={{ width: "100%", background: "rgba(16,38,59,0.84)", padding: "1rem" }}><strong style={{ display: "block", color: "#c9a84c", fontSize: "0.68rem", letterSpacing: "0.12em", textTransform: "uppercase" }}>Your starting point</strong><b style={{ display: "block", marginTop: "0.55rem", fontFamily: "Instrument Serif, Georgia, serif", fontSize: "2rem", fontWeight: 400, lineHeight: 0.95 }}>{activePathway}</b><ul style={{ display: "grid", gap: "0.45rem", marginTop: "1rem", borderTop: "1px solid rgba(252,251,247,0.22)", paddingTop: "0.8rem", fontSize: "0.78rem", fontWeight: 700 }}><li>01&nbsp;&nbsp;Options to compare</li><li>02&nbsp;&nbsp;Application priority</li><li>03&nbsp;&nbsp;Your next step</li></ul></div>
-    </div>
-  }
+  if (reduced) return <StaticDecisionMap imageSrc={imageSrc} pathway={activePathway} />
 
-  return <div className="hero-motion-player" aria-hidden="true" style={{ backgroundImage: `url(${imageSrc})`, backgroundSize: "cover", backgroundPosition: "center" }}><Player key={activePathway} component={ConsultationMapMotion} inputProps={{ pathway: activePathway }} durationInFrames={120} compositionWidth={720} compositionHeight={920} fps={30} autoPlay loop={false} controls={false} style={{ width: "100%", height: "100%", backgroundColor: "transparent" }} /></div>
+  return <div className="hero-motion-player" aria-hidden="true" style={{ backgroundImage: `linear-gradient(rgba(11,34,55,0.9), rgba(11,34,55,0.9)), url(${imageSrc})`, backgroundBlendMode: "normal", backgroundSize: "cover", backgroundPosition: "center" }}><Player key={activePathway} component={DecisionMapMotion} inputProps={{ pathway: activePathway }} durationInFrames={360} compositionWidth={720} compositionHeight={920} fps={30} autoPlay loop controls={false} style={{ width: "100%", height: "100%", backgroundColor: "transparent" }} /></div>
 }

@@ -117,8 +117,7 @@ export default function HomePage() {
 
               <figure className="hero-evidence hero-evidence-slot">
                 <ConsultationHeroMotion imageSrc={assets.consultation} pathway={topic} />
-                <figcaption>A finite 15-minute plan for the question that needs an answer next.</figcaption>
-                <span className="sr-only">A short visual explanation: bring your university question, compare what matters, and leave with a next move.</span>
+                <figcaption className="sr-only">A University Decision Map: bring your university question, compare options, set priorities, and leave with a next step.</figcaption>
               </figure>
 
             <div className="hero-form-slot">
