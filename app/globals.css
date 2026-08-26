@@ -21,8 +21,8 @@
 
 @layer base {
   * { border-color: var(--border); outline-color: rgba(201, 168, 76, 0.56); }
-  html { scroll-behavior: smooth; scrollbar-color: #c9a84c #f3efe6; scrollbar-width: thin; }
-  body { background: var(--background); color: var(--foreground); font-family: var(--font-sans); }
+  html { scroll-behavior: smooth; scroll-padding-top: 5rem; scrollbar-color: #c9a84c #f3efe6; scrollbar-width: thin; }
+  body { overflow-x: clip; background: var(--background); color: var(--foreground); font-family: var(--font-sans); }
   h1, h2, h3, h4, h5, h6 { font-family: var(--font-heading); }
   ::selection { background: rgba(201, 168, 76, 0.38); color: #10263b; }
   a, button, input, select, textarea { -webkit-tap-highlight-color: transparent; }

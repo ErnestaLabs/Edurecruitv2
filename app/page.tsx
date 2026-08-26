@@ -16,7 +16,6 @@ import { useEffect, useRef, useState, useTransition } from "react"
 
 const assets = {
   logo: "/manus-storage/edurecruit-logo-mark_4dd97337.png",
-  consultation: "/manus-storage/edurecruit-consultation-detail_760b38e4.jpg",
 }
 
 const navItems = [
@@ -33,9 +32,9 @@ const preparation = [
 ]
 
 const topics = [
-  { label: "Choosing a course or university", audience: "Starting university", outcome: "Build a sharper shortlist" },
-  { label: "Application or personal statement", audience: "Working on an application", outcome: "Set your application priorities" },
-  { label: "Returning to study", audience: "Returning or changing direction", outcome: "Plan the questions to check next" },
+  { label: "Finding the right fit", audience: "Starting university", outcome: "Build a sharper shortlist" },
+  { label: "Strengthening your application", audience: "Working on an application", outcome: "Set your application priorities" },
+  { label: "Navigating a new direction", audience: "Returning or changing direction", outcome: "Plan the questions to check next" },
 ] as const
 
 const faqs = [
@@ -64,10 +63,11 @@ export default function HomePage() {
 
   const moveToContact = (nextTopic: string) => {
     setFormTopic(nextTopic)
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     window.setTimeout(() => {
-      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" })
-      document.getElementById("name")?.focus({ preventScroll: true })
-    }, 80)
+      document.getElementById("contact")?.scrollIntoView({ behavior: reducedMotion ? "auto" : "smooth", block: "start" })
+      window.setTimeout(() => document.getElementById("name")?.focus({ preventScroll: true }), 150)
+    }, 0)
   }
 
   const startPlan = (event: React.FormEvent<HTMLFormElement>) => {
@@ -110,9 +110,9 @@ export default function HomePage() {
         <section className="relume-hero">
           <div className="shell hero-layout">
             <div className="hero-copy">
-              <p className="hero-eyebrow">Personal university guidance</p>
+              <p className="hero-eyebrow">Independent university guidance</p>
               <h1>Turn your university question into a shortlist and practical next step.</h1>
-              <p>In 15 minutes, we help you filter the noise, compare the options that matter, and identify what to check next.</p>
+              <p>In 15 minutes, we help you filter the noise, compare realistic options, and identify the exact move you need to make next.</p>
             </div>
 
               <figure className="hero-evidence hero-evidence-slot">
@@ -123,21 +123,21 @@ export default function HomePage() {
             <div className="hero-form-slot">
               <form className="hero-capture" onSubmit={startPlan}>
                 <fieldset>
-                  <legend>Where shall we start?</legend>
-                  <p className="hero-plan-intro">A focused conversation to work through the question in front of you.</p>
+                  <legend>Where do you need the most clarity?</legend>
+                  <p className="hero-plan-intro">A focused conversation to resolve the question holding you back.</p>
                   <ul className="hero-plan-outcomes" aria-label="What the 15-minute plan covers">
-                    <li><span>01</span>Options worth comparing</li>
-                    <li><span>02</span>Application priorities</li>
-                    <li><span>03</span>A practical next step</li>
+                    <li><span>01</span>Realistic course options</li>
+                    <li><span>02</span>Clear application priorities</li>
+                    <li><span>03</span>A defined next step</li>
                   </ul>
-                  <div className="hero-topic-options">
-                    {topics.map((option) => <button key={option.label} type="button" aria-pressed={topic === option.label} data-active={topic === option.label} onClick={() => selectTopic(option.label)}><span>{option.audience}</span><strong>{option.label}</strong><small>{option.outcome}</small></button>)}
+                  <div className="hero-topic-options" role="radiogroup" aria-label="Choose your starting topic">
+                    {topics.map((option) => <button key={option.label} type="button" role="radio" aria-checked={topic === option.label} data-active={topic === option.label} onClick={() => selectTopic(option.label)}><span>{option.audience}</span><strong>{option.label}</strong><small>{option.outcome}</small></button>)}
                   </div>
                 </fieldset>
                 <div className="hero-capture-row">
                   <button type="submit">Start my 15-minute plan <ArrowRight aria-hidden="true" className="size-4" /></button>
                 </div>
-                <p>Free and no obligation. We reply within 24 hours.</p>
+                <p>Free student support. No obligation. We reply within 24 hours.</p>
               </form>
             </div>
           </div>
