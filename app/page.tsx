@@ -141,38 +141,33 @@ export default function HomePage() {
 
         <section className="section-pad bg-cream">
           <div className="shell support-layout">
-            <ScrollReveal variant="section" className="support-reveal">
-              <div>
-                <h2 className="display max-w-[14ch]">Personal help with the questions behind the application.</h2>
-              </div>
-              <div className="support-lines">
-                <p><Check aria-hidden="true" className="size-5 text-gold" />Course and university options that fit your situation.</p>
-                <p><Check aria-hidden="true" className="size-5 text-gold" />Personal statement, CV, and application priorities.</p>
-                <p><Check aria-hidden="true" className="size-5 text-gold" />Practical UCAS, document, or next-step questions.</p>
-              </div>
-            </ScrollReveal>
+            <div>
+              <h2 className="display max-w-[14ch]">Personal help with the questions behind the application.</h2>
+            </div>
+            <div className="support-lines">
+              <p><Check aria-hidden="true" className="size-5 text-gold" />Course and university options that fit your situation.</p>
+              <p><Check aria-hidden="true" className="size-5 text-gold" />Personal statement, CV, and application priorities.</p>
+              <p><Check aria-hidden="true" className="size-5 text-gold" />Practical UCAS, document, or next-step questions.</p>
+            </div>
           </div>
         </section>
 
         <section id="questions" aria-labelledby="questions-title" className="section-pad bg-warm-grey">
           <div className="shell faq-layout">
-            <ScrollReveal variant="section" className="faq-reveal">
-              <div>
-                <h2 id="questions-title" className="display max-w-[13ch]">The practical questions deserve clear answers.</h2>
-              </div>
-              <div className="faq-list">
-                {faqs.map((faq, index) => {
-                  const isOpen = openFaq === index
-                  return <article key={faq.question}><h3><button type="button" aria-expanded={isOpen} onClick={() => setOpenFaq(isOpen ? -1 : index)}>{faq.question}<ChevronDown aria-hidden="true" className={`size-5 ${isOpen ? "rotate-180" : ""}`} /></button></h3>{isOpen && <p>{faq.answer}</p>}</article>
-                })}
-              </div>
-            </ScrollReveal>
+            <div>
+              <h2 id="questions-title" className="display max-w-[13ch]">The practical questions deserve clear answers.</h2>
+            </div>
+            <div className="faq-list">
+              {faqs.map((faq, index) => {
+                const isOpen = openFaq === index
+                return <article key={faq.question}><h3><button type="button" aria-expanded={isOpen} onClick={() => setOpenFaq(isOpen ? -1 : index)}>{faq.question}<ChevronDown aria-hidden="true" className={`size-5 ${isOpen ? "rotate-180" : ""}`} /></button></h3>{isOpen && <p>{faq.answer}</p>}</article>
+              })}
+            </div>
           </div>
         </section>
 
         <section id="contact" aria-labelledby="contact-title" className="section-pad bg-navy text-cream">
           <div className="shell contact-layout">
-            <ScrollReveal variant="contact" className="contact-reveal">
             <div className="contact-copy">
               <h2 id="contact-title" className="display max-w-[12ch]">Send the question you want to make clearer.</h2>
               <p>Tell us where you are stuck. The conversation is free, and we reply within 24 hours to arrange it and explain what happens next.</p>
@@ -196,7 +191,6 @@ export default function HomePage() {
                 </form>
               )}
             </div>
-            </ScrollReveal>
           </div>
         </section>
       </main>

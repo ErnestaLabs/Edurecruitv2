@@ -107,7 +107,6 @@
   .partner-course-list ul { border-top: 1px solid rgba(252, 251, 247, 0.18); }
   .partner-course-list li { border-bottom: 1px solid rgba(252, 251, 247, 0.18); padding: 1rem 0; color: rgba(252, 251, 247, 0.92); line-height: 1.45; }
   .support-layout, .faq-layout, .contact-layout { display: grid; gap: 2.5rem; }
-  .support-reveal, .faq-reveal, .contact-reveal { display: grid; gap: 2.5rem; }
   .support-lines { border-top: 1px solid rgba(16, 38, 59, 0.16); }
   .support-lines p { display: flex; gap: 0.85rem; align-items: flex-start; border-bottom: 1px solid rgba(16, 38, 59, 0.16); padding: 1.25rem 0; color: #10263b; font-size: 1.1rem; line-height: 1.55; }
   .faq-list { border-top: 1px solid rgba(16, 38, 59, 0.2); }
@@ -175,7 +174,6 @@
   .partner-detail { grid-template-columns: 0.86fr 1.14fr; gap: 5rem; }
   .partner-facts { grid-template-columns: repeat(3, 1fr); }
   .partner-course-list { border-top: 0; border-left: 1px solid rgba(252, 251, 247, 0.23); padding: 0 0 0 2rem; }
-  .support-reveal, .faq-reveal, .contact-reveal { grid-template-columns: 0.78fr 1.22fr; align-items: end; gap: clamp(3rem, 7vw, 9rem); }
 }
 
 @media (prefers-reduced-motion: reduce) {
