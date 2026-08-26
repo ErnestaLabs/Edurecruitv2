@@ -109,7 +109,6 @@ export function PromptGroundTruthLanding() {
   const handleLeadSubmit = (formData: FormData) => startTransition(async () => setLeadState(await submitLead(emptyLeadState, formData)))
   const activeTrack = tracks[trackIndex]
   const activeStory = stories[storyIndex]
-  const partnerPair = universities.slice(0, 2)
 
   return <div className="gt-site" data-ready={ready}>
     {!ready && <div className="gt-loader" role="status" aria-label="Loading EduRecruitment"><div className="gt-loader-brand"><Image src={logo} width={42} height={42} alt="" unoptimized /><span>Edu<span>Recruitment</span></span></div><div className="gt-loader-track"><i /></div><p>Independent university guidance</p></div>}
@@ -140,7 +139,8 @@ export function PromptGroundTruthLanding() {
 
       <section id="partners" className="gt-partner-rail gt-section" aria-labelledby="gt-partner-rail-title">
         <div className="gt-partner-rail-copy"><p className="gt-section-eyebrow">Listed university partners</p><h2 id="gt-partner-rail-title">Options worth comparing.</h2><p>Start with a real option, then bring the question that matters for your situation.</p></div>
-        <div className="gt-partner-logo-grid" aria-label="Listed university partner logos">{universities.map((partner) => <a key={partner.slug} href="#partner-options" aria-label={`View listed options for ${partner.name}`}><Image src={partner.logo} width={280} height={132} alt={`${partner.name} logo`} unoptimized /></a>)}</div>
+        <div className="gt-partner-logo-grid" aria-label="Listed university partner logos">{universities.map((partner) => <div key={partner.slug}><Image src={partner.logo} width={280} height={132} alt={`${partner.name} logo`} unoptimized /></div>)}</div>
+        <button type="button" className="gt-partner-question" onClick={() => openContact("I would like to ask about a listed partner or course option.")}>Ask about a listed partner or course option <ArrowRight aria-hidden="true" /></button>
       </section>
 
       <section id="stories" className="gt-trust gt-section" aria-labelledby="gt-trust-title">
@@ -151,8 +151,6 @@ export function PromptGroundTruthLanding() {
       </section>
 
       <section id="pathways" className="gt-pathways gt-section" aria-labelledby="gt-pathways-title"><div className="gt-pathways-heading gt-reveal"><p className="gt-section-eyebrow">Guidance pathways</p><h2 id="gt-pathways-title">A route for the question you are carrying.</h2></div><div className="gt-pathway-list">{pathways.map((pathway, index) => <button key={pathway.index} type="button" className="gt-pathway-row gt-reveal" style={{ transitionDelay: `${index * 90}ms` }} onClick={() => openContact(pathway.title)}><span>{pathway.index}</span><div><h3>{pathway.title}</h3><p>{pathway.copy}</p></div><i><ArrowRight aria-hidden="true" /></i></button>)}</div></section>
-
-      <section id="partner-options" className="gt-partners gt-section" aria-labelledby="gt-partners-title"><div className="gt-partner-intro gt-reveal"><p className="gt-section-eyebrow">Listed partner options</p><h2 id="gt-partners-title">Start with an option worth comparing.</h2><p>These listed partners and course examples are a place to start. Availability can change, so we help you identify the questions to check.</p></div><div className="gt-partner-cards">{partnerPair.map((partner, index) => <article className={`gt-partner-card gt-reveal gt-partner-card-${index + 1}`} key={partner.slug}><div className="gt-partner-logo"><Image src={partner.logo} width={260} height={120} alt={`${partner.name} logo`} unoptimized /></div><div><p>{partner.campus}</p><h3>{partner.shortName}</h3><span>{partner.courses.slice(0, 3).map((course) => course.name).join(" · ")}</span></div><button type="button" onClick={() => openContact(`I want to ask about ${partner.name} and the listed options.`)}>Ask about this option <ArrowUpRight aria-hidden="true" /></button></article>)}</div><div className="gt-partner-link"><a href="#contact" onClick={(event) => { event.preventDefault(); openContact("I would like to compare listed partner options.") }}>Explore the partner questions <ArrowRight aria-hidden="true" /></a></div></section>
 
       <section className="gt-process gt-section" aria-labelledby="gt-process-title"><p className="gt-process-label">What the first conversation gives you</p><div className="gt-process-grid"><div><strong>15 MIN</strong><span id="gt-process-title">A focused planning conversation</span></div><div><strong>FREE</strong><span>Student support with no obligation</span></div><div><strong>24H</strong><span>We reply within 24 hours</span></div><div><strong>ONE</strong><span>Practical next step to take forward</span></div></div></section>
 
