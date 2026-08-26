@@ -4,6 +4,7 @@
  * one lead proof and tightly grouped supporting proof rather than carousel theatre.
  */
 import Image from "next/image"
+import { ScrollReveal } from "@/components/landing/scroll-reveal"
 
 const stories = [
   {
@@ -32,13 +33,14 @@ export function TestimonialShowcase() {
   return (
     <section id="stories" aria-labelledby="stories-title" className="section-pad bg-warm-grey">
       <div className="shell">
-        <div className="proof-heading">
-          <h2 id="stories-title" className="display max-w-[14ch]">Support should make the next step feel less lonely.</h2>
-          <p className="section-intro">These are the experiences students shared after working through their university questions with EduRecruitment.</p>
-        </div>
+        <ScrollReveal variant="section">
+          <div className="proof-heading">
+            <h2 id="stories-title" className="display max-w-[14ch]">Support should make the next step feel less lonely.</h2>
+            <p className="section-intro">These are the experiences students shared after working through their university questions with EduRecruitment.</p>
+          </div>
 
-        <div className="proof-grid mt-10 md:mt-14">
-          <figure className="proof-lead">
+          <div className="proof-grid mt-10 md:mt-14">
+            <figure className="proof-lead">
             <div className="proof-image-wrap">
               <Image src={lead.src} alt={`${lead.name}, ${lead.designation}`} fill sizes="(min-width: 1024px) 54vw, 100vw" className="object-cover" />
             </div>
@@ -46,20 +48,21 @@ export function TestimonialShowcase() {
               <blockquote>“{lead.quote}”</blockquote>
               <p><strong>{lead.name}</strong> · {lead.designation}</p>
             </figcaption>
-          </figure>
+            </figure>
 
-          <div className="proof-support">
-            {[second, third].map((story) => (
-              <article key={story.name} className="proof-quote">
+            <div className="proof-support">
+              {[second, third].map((story) => (
+                <article key={story.name} className="proof-quote">
                 <div className="proof-person">
                   <Image src={story.src} alt={`${story.name}, ${story.designation}`} width={64} height={64} className="size-16 object-cover" />
                   <div><p>{story.name}</p><span>{story.designation}</span></div>
                 </div>
                 <blockquote>“{story.quote}”</blockquote>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   )

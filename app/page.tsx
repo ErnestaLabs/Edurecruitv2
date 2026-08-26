@@ -6,6 +6,7 @@
  * journey; Impeccable enforces one clear path, restrained hierarchy, and mobile-safe flow.
  */
 import { submitLead, type LeadFormState } from "@/app/actions/submit-lead"
+import { ScrollReveal } from "@/components/landing/scroll-reveal"
 import { TestimonialShowcase } from "@/components/landing/testimonial-showcase"
 import { UniversityCourseAtlas } from "@/components/landing/university-course-atlas"
 import { ArrowRight, ArrowUpRight, Check, CheckCircle2, ChevronDown, Menu, MessageCircle, Phone, X } from "lucide-react"
@@ -96,6 +97,7 @@ export default function HomePage() {
         <section className="relume-hero">
           <div className="shell hero-layout">
             <div className="hero-copy">
+              <ScrollReveal variant="hero-copy">
               <h1>Start with the university question you already have.</h1>
               <p>EduRecruitment is personal guidance for the course choice, application, or practical decision you do not want to get wrong alone.</p>
               <form className="hero-capture" onSubmit={startPlan}>
@@ -109,23 +111,28 @@ export default function HomePage() {
                 </div>
                 <p>Free and no obligation. We reply within 24 hours.</p>
               </form>
+              </ScrollReveal>
             </div>
 
-            <figure className="hero-evidence">
-              <Image src={assets.consultation} alt="Two people having a focused university planning conversation over notes and coffee." fill priority unoptimized sizes="(min-width: 1024px) 51vw, 100vw" className="object-cover" />
-              <figcaption>A human conversation before a high-stakes choice.</figcaption>
-            </figure>
+            <ScrollReveal variant="hero-image" className="hero-evidence-reveal" delay={100}>
+              <figure className="hero-evidence">
+                <Image src={assets.consultation} alt="Two people having a focused university planning conversation over notes and coffee." fill priority unoptimized sizes="(min-width: 1024px) 51vw, 100vw" className="object-cover" />
+                <figcaption>A human conversation before a high-stakes choice.</figcaption>
+              </figure>
+            </ScrollReveal>
           </div>
         </section>
 
         <section id="how-it-helps" aria-labelledby="preparation-title" className="section-pad bg-navy text-cream">
           <div className="shell">
-            <div className="preparation-heading">
-              <h2 id="preparation-title" className="display max-w-[15ch]">You do not need to have it all worked out before you speak.</h2>
-            </div>
-            <div className="preparation-list mt-12">
-              {preparation.map((item) => <article key={item.title}><h3>{item.title}</h3><p>{item.copy}</p></article>)}
-            </div>
+            <ScrollReveal variant="statement">
+              <div className="preparation-heading">
+                <h2 id="preparation-title" className="display max-w-[15ch]">You do not need to have it all worked out before you speak.</h2>
+              </div>
+              <div className="preparation-list mt-12">
+                {preparation.map((item) => <article key={item.title}><h3>{item.title}</h3><p>{item.copy}</p></article>)}
+              </div>
+            </ScrollReveal>
           </div>
         </section>
 
@@ -134,33 +141,38 @@ export default function HomePage() {
 
         <section className="section-pad bg-cream">
           <div className="shell support-layout">
-            <div>
-              <h2 className="display max-w-[14ch]">Personal help with the questions behind the application.</h2>
-            </div>
-            <div className="support-lines">
-              <p><Check aria-hidden="true" className="size-5 text-gold" />Course and university options that fit your situation.</p>
-              <p><Check aria-hidden="true" className="size-5 text-gold" />Personal statement, CV, and application priorities.</p>
-              <p><Check aria-hidden="true" className="size-5 text-gold" />Practical UCAS, document, or next-step questions.</p>
-            </div>
+            <ScrollReveal variant="section" className="support-reveal">
+              <div>
+                <h2 className="display max-w-[14ch]">Personal help with the questions behind the application.</h2>
+              </div>
+              <div className="support-lines">
+                <p><Check aria-hidden="true" className="size-5 text-gold" />Course and university options that fit your situation.</p>
+                <p><Check aria-hidden="true" className="size-5 text-gold" />Personal statement, CV, and application priorities.</p>
+                <p><Check aria-hidden="true" className="size-5 text-gold" />Practical UCAS, document, or next-step questions.</p>
+              </div>
+            </ScrollReveal>
           </div>
         </section>
 
         <section id="questions" aria-labelledby="questions-title" className="section-pad bg-warm-grey">
           <div className="shell faq-layout">
-            <div>
-              <h2 id="questions-title" className="display max-w-[13ch]">The practical questions deserve clear answers.</h2>
-            </div>
-            <div className="faq-list">
-              {faqs.map((faq, index) => {
-                const isOpen = openFaq === index
-                return <article key={faq.question}><h3><button type="button" aria-expanded={isOpen} onClick={() => setOpenFaq(isOpen ? -1 : index)}>{faq.question}<ChevronDown aria-hidden="true" className={`size-5 ${isOpen ? "rotate-180" : ""}`} /></button></h3>{isOpen && <p>{faq.answer}</p>}</article>
-              })}
-            </div>
+            <ScrollReveal variant="section" className="faq-reveal">
+              <div>
+                <h2 id="questions-title" className="display max-w-[13ch]">The practical questions deserve clear answers.</h2>
+              </div>
+              <div className="faq-list">
+                {faqs.map((faq, index) => {
+                  const isOpen = openFaq === index
+                  return <article key={faq.question}><h3><button type="button" aria-expanded={isOpen} onClick={() => setOpenFaq(isOpen ? -1 : index)}>{faq.question}<ChevronDown aria-hidden="true" className={`size-5 ${isOpen ? "rotate-180" : ""}`} /></button></h3>{isOpen && <p>{faq.answer}</p>}</article>
+                })}
+              </div>
+            </ScrollReveal>
           </div>
         </section>
 
         <section id="contact" aria-labelledby="contact-title" className="section-pad bg-navy text-cream">
           <div className="shell contact-layout">
+            <ScrollReveal variant="contact" className="contact-reveal">
             <div className="contact-copy">
               <h2 id="contact-title" className="display max-w-[12ch]">Send the question you want to make clearer.</h2>
               <p>Tell us where you are stuck. The conversation is free, and we reply within 24 hours to arrange it and explain what happens next.</p>
@@ -184,6 +196,7 @@ export default function HomePage() {
                 </form>
               )}
             </div>
+            </ScrollReveal>
           </div>
         </section>
       </main>

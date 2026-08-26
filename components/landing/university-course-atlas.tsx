@@ -6,6 +6,7 @@
  * reading flow by keeping selection, facts, and action in normal document order.
  */
 import { universities } from "@/data/universities"
+import { ScrollReveal } from "@/components/landing/scroll-reveal"
 import { ArrowRight, CalendarDays, Clock3, MapPin } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -23,14 +24,15 @@ export function UniversityCourseAtlas({ onQuestionSelected }: UniversityCourseAt
   return (
     <section id="courses" aria-labelledby="partners-title" className="section-pad bg-navy text-cream">
       <div className="shell">
-        <div className="partner-heading">
-          <div>
-            <h2 id="partners-title" className="display max-w-[15ch]">Choose an option to ask a better question.</h2>
+        <ScrollReveal variant="section">
+          <div className="partner-heading">
+            <div>
+              <h2 id="partners-title" className="display max-w-[15ch]">Choose an option to ask a better question.</h2>
+            </div>
+            <p>These listed partners and course examples are a place to start. We can help you work out what is worth comparing for your situation.</p>
           </div>
-          <p>These listed partners and course examples are a place to start. We can help you work out what is worth comparing for your situation.</p>
-        </div>
 
-        <div role="group" aria-label="Select a university partner" className="partner-brand-row mt-10">
+          <div role="group" aria-label="Select a university partner" className="partner-brand-row mt-10">
           {universities.map((university) => {
             const selected = university.slug === activeUniversity.slug
             return (
@@ -39,9 +41,9 @@ export function UniversityCourseAtlas({ onQuestionSelected }: UniversityCourseAt
               </button>
             )
           })}
-        </div>
+          </div>
 
-        <article aria-live="polite" className="partner-detail mt-10">
+          <article aria-live="polite" className="partner-detail mt-10">
           <div className="partner-detail-main">
             <h3 className="font-heading text-4xl leading-[0.98] md:text-5xl">{activeUniversity.name}</h3>
             <dl className="partner-facts mt-7">
@@ -62,7 +64,8 @@ export function UniversityCourseAtlas({ onQuestionSelected }: UniversityCourseAt
             </ul>
             <p className="mt-5 text-sm leading-6 text-cream/65">Course and intake availability can change. We will help you identify the questions to check before you decide.</p>
           </div>
-        </article>
+          </article>
+        </ScrollReveal>
       </div>
     </section>
   )
